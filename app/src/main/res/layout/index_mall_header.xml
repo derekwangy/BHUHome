@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:banner="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/color_ededed"
+    android:layout_height="match_parent">
+
+
+    <!--活动-->
+        <FrameLayout
+            android:id="@+id/framViewPager"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="wrap_content">
+            <com.bh.uhome.bhuhome.banner.MallIndexBanner
+                android:id="@+id/mall_viewpager_banner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                banner:bb_scale="0.534"/>
+
+        </FrameLayout>
+
+</LinearLayout>

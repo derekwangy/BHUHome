@@ -1,0 +1,87 @@
+<!--
+
+    @Project 『 Doctor 』
+    @Model 『 Comm 』
+    @Type 『 Styles 』
+    @Prefix 『 d_c_t_ 』
+
+-->
+
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="d_c_t_app_theme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/d_c_c_3F51B5</item>
+        <item name="colorPrimaryDark">@color/d_c_c_303F9F</item>
+        <item name="colorAccent">@color/d_c_c_FF4081</item>
+        <!--hide title-->
+
+    </style>
+
+    <style name="Transparent" parent="d_c_t_app_theme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="FullScreen" parent="Transparent">
+        <!-- 隐藏状态栏 -->
+        <item name="android:windowFullscreen">true</item>
+        <!-- 隐藏标题栏 -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--按钮样式-->
+    <style name="b01_01">
+        <item name="android:background">@drawable/b01_01</item>
+        <item name="android:textColor">@color/b01_01</item>
+        <item name="android:textSize">@dimen/font_17</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/d40</item>
+        <item name="android:layout_marginLeft">@dimen/d15</item>
+        <item name="android:layout_marginRight">@dimen/d15</item>
+        <item name="android:layout_marginBottom">@dimen/d10</item>
+    </style>
+
+    <style name="b01_02">
+        <item name="android:background">@drawable/b01_02</item>
+        <item name="android:textColor">@color/b01_02</item>
+        <item name="android:textSize">@dimen/font_18</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/d40</item>
+        <item name="android:layout_marginLeft">@dimen/d15</item>
+        <item name="android:layout_marginRight">@dimen/d15</item>
+        <item name="android:layout_marginBottom">@dimen/d10</item>
+    </style>
+
+    <style name="b01_03">
+        <item name="android:background">@drawable/b01_03</item>
+        <item name="android:textColor">@color/b01_03</item>
+        <item name="android:textSize">@dimen/font_18</item>
+        <item name="android:layout_height">@dimen/d40</item>
+        <item name="android:layout_marginBottom">@dimen/d10</item>
+    </style>
+
+    <style name="b01_04">
+        <item name="android:background">@drawable/b01_04</item>
+        <item name="android:textColor">@color/b01_04</item>
+        <item name="android:textSize">@dimen/font_18</item>
+        <item name="android:layout_width">@dimen/d120</item>
+        <item name="android:layout_height">@dimen/d60</item>
+    </style>
+    <!--按钮样式-->
+
+    <!--文字样式-->
+    <style name="f36_1a">
+        <item name="android:textSize">@dimen/font_18</item>
+        <item name="android:textColor">@color/color_1a1a1a</item>
+    </style>
+    <style name="f24_1a">
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@color/color_1a1a1a</item>
+    </style>
+    <style name="f24_a7">
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@color/color_a7a7a7</item>
+    </style>
+</resources>

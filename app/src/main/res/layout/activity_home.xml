@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_ffffff">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+    <com.bh.uhome.bhuhome.widget.UnScrollViewPager
+        android:id="@+id/layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view_line"/>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@+id/radio_group"
+        android:background="@color/color_dfdfdf"/>
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_ffffff"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingTop="4dp">
+
+        <RadioButton
+            android:id="@+id/radio_one"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_ffffff"
+            android:button="@null"
+            android:drawableTop="@drawable/wemay_select"
+            android:gravity="center_horizontal"
+            android:text="@string/string_home_activity_wemay"
+            android:textColor="@drawable/home_tab_text_color_selector"
+            android:textSize="13dp"/>
+
+        <RadioButton
+            android:id="@+id/radio_two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_ffffff"
+            android:button="@null"
+            android:drawableTop="@drawable/health_select"
+            android:gravity="center_horizontal"
+            android:text="@string/string_home_activity_health"
+            android:visibility="gone"
+            android:textColor="@drawable/home_tab_text_color_selector"
+            android:textSize="13dp"/>
+
+        <RadioButton
+            android:id="@+id/radio_three"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_ffffff"
+            android:button="@null"
+            android:drawableTop="@drawable/find_select"
+            android:gravity="center_horizontal"
+            android:text="@string/string_home_activity_find"
+            android:textColor="@drawable/home_tab_text_color_selector"
+            android:textSize="13dp"/>
+
+        <RadioButton
+            android:id="@+id/radio_four"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_ffffff"
+            android:button="@null"
+            android:drawableTop="@drawable/me_select"
+            android:gravity="center_horizontal"
+            android:text="@string/string_home_activity_me"
+            android:textColor="@drawable/home_tab_text_color_selector"
+            android:textSize="13dp"/>
+
+    </RadioGroup>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_ffffff">
+
+        <ImageView
+            android:layout_width="@dimen/d110"
+            android:layout_height="@dimen/d50"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/d65"
+            android:src="@mipmap/ic_login_logo" />
+
+        <com.derek.rx.rxretrofitmvp.widget.ClearableEditText
+            android:id="@+id/edit_text_phone"
+            style="@style/f36_1a"
+            android:layout_width="@dimen/d260"
+            android:layout_height="@dimen/d40"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="133dp"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="@string/input_phone"
+            android:inputType="number"
+            android:maxLength="13"
+            android:textColorHint="@color/color_a7a7a7"
+            tools:text="13456961183" />
+
+        <View
+            android:layout_width="@dimen/d260"
+            android:layout_height="@dimen/d0.5"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="173dp"
+            android:background="@color/color_3b93eb" />
+
+        <Button
+            android:id="@+id/button_login"
+            style="@style/b01_01"
+            android:layout_width="@dimen/d260"
+            android:layout_height="@dimen/d40"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="205dp"
+            android:enabled="false"
+            android:text="快速登录" />
+
+        <TextView
+            style="@style/f24_a7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="265dp"
+            android:text="登录" />
+
+    </FrameLayout>
+
+</android.support.constraint.ConstraintLayout>

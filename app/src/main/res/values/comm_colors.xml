@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+    @Project 『 Doctor 』
+    @Model 『 Comm 』
+    @Type 『 Colors 』
+    @Prefix 『 d_c_c_ 』
+
+-->
+
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="gray_background">#f5f5f5</color>
+
+
+    <color name="d_c_c_3F51B5">#3F51B5</color>
+    <color name="d_c_c_303F9F">#303F9F</color>
+    <color name="d_c_c_FF4081">#FF4081</color>
+
+    <!-- 主色 -->
+    <color name="color_3b93eb">#3d93eb</color>
+    <color name="color_55a4f2">#55a4f2</color>
+    <color name="color_6db0f2">#6db0f2</color>
+    <color name="color_85bcf2">#85bcf2</color>
+    <color name="color_9dc8f2">#9dc8f2</color>
+    <color name="color_b6d4f2">#b6d4f2</color>
+
+    <color name="color_ffbc00">#ffbc00</color>
+    <color name="color_ffc933">#ffc933</color>
+    <color name="color_ffd666">#ffd666</color>
+    <color name="color_ffe499">#ffe499</color>
+    <color name="color_fff1cc">#fff1cc</color>
+    <color name="color_fff8e5">#fff8e5</color>
+    <color name="color_add6ff">#add6ff</color>
+
+    <!-- 辅助色 -->
+    <color name="color_black">#000000</color>
+    <color name="color_404040">#404040</color>
+    <color name="color_808080">#808080</color>
+    <color name="color_a7a7a7">#a7a7a7</color>
+    <color name="color_f7f7f7">#f7f7f7</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_dfdfdf">#dfdfdf</color>
+    <color name="color_f0f0f0">#f0f0f0</color>
+
+    <color name="color_fe5451">#fe5451</color>
+    <color name="color_f25555">#f25555</color>
+    <color name="color_f26d6d">#f26d6d</color>
+    <color name="color_f28585">#f28585</color>
+    <color name="color_f29d9d">#f29d9d</color>
+    <color name="color_f2b6b6">#f2b6b6</color>
+    <color name="color_f2cece">#f2cece</color>
+
+    <color name="color_1ec859">#1ec859</color>
+    <color name="color_49cf78">#49cf78</color>
+    <color name="color_65d08b">#65d08b</color>
+    <color name="color_7bd39a">#7bd39a</color>
+    <color name="color_8ed6a7">#8ed6a7</color>
+    <color name="color_a1d9b4">#a1d9b4</color>
+
+    <color name="color_ff8940">#ff8940</color>
+    <color name="color_ff9959">#ff9959</color>
+    <color name="color_ffa973">#ffa973</color>
+    <color name="color_ffb88c">#ffb88c</color>
+    <color name="color_ffc8a6">#ffc8a6</color>
+    <color name="color_ffd8bf">#ffd8bf</color>
+
+    <color name="color_50b4e6">#50b4e6</color>
+    <color name="color_67bbe6">#67bbe6</color>
+    <color name="color_7ec3e6">#7ec3e6</color>
+    <color name="color_95cbe6">#95cbe6</color>
+    <color name="color_18a2ff">#18a2ff</color>
+    <color name="color_9fd8ee">#9fd8ee</color>
+    <color name="color_acd2e6">#acd2e6</color>
+    <color name="color_c3dae6">#c3dae6</color>
+
+    <!-- 额外需求 -->
+    <color name="color_ececec">#ececec</color>
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_e6e6e6">#e6e6e6</color>
+    <color name="color_ffb106">#ffb106</color>
+    <color name="color_55000000">#55000000</color>
+    <!-- 透明度40% -->
+    <color name="color_66000000">#66000000</color>
+    <!-- 透明度30% -->
+    <color name="color_4d000000">#4d000000</color>
+    <!-- 透明度50% -->
+    <color name="color_7f000000">#7f000000</color>
+    <color name="color_00000000">#00000000</color>
+    <color name="color_000000">#000000</color>
+    <color name="color_fefefe">#fefefe</color>
+    <color name="color_f9f9f9">#f9f9f9</color>
+    <color name="color_5e5e5e">#5e5e5e</color>
+    <color name="color_e5e5e5">#e5e5e5</color>
+    <color name="color_3d94ea">#3d94ea</color>
+    <color name="color_375f7a">#375f7a</color>
+    <color name="color_eaeaea">#eaeaea</color>
+    <color name="color_f2f2f2">#f2f2f2</color>
+    <color name="color_555555">#555555</color>
+    <color name="color_aaaaaa">#aaaaaa</color>
+    <color name="color_c7c7c7">#c7c7c7</color>
+    <color name="color_545454">#545454</color>
+    <color name="color_5b5b5b">#5b5b5b</color>
+    <color name="color_c9c9ce">#c9c9ce</color>
+    <color name="color_ef4939">#ef4939</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="color_64a7ea">#64a7ea</color>
+    <color name="color_55ffffff">#55ffffff</color>
+    <color name="color_26ffffff">#26ffffff</color>
+    <color name="color_efefef">#efefef</color>
+    <color name="color_1a1a1a">#1a1a1a</color>
+    <color name="color_fa7070">#fa7070</color>
+    <color name="color_2b67a3">#2b67a3</color>
+    <color name="color_a93b3b">#a93b3b</color>
+    <color name="color_85b9ec">#85b9ec</color>
+    <color name="color_dedede">#dedede</color>
+    <color name="color_ededed">#ededed</color>
+    <color name="color_9ec9f4">#9ec9f4</color>
+    <color name="color_02ccff">#02ccff</color>
+    <color name="color_1ba0ff">#1ba0ff</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_e8e8e8">#e8e8e8</color>
+    <color name="color_6ce1a1">#6ce1a1</color>
+    <color name="color_3acac1">#3acac1</color>
+    <color name="color_ff9c57">#ff9c57</color>
+    <color name="color_f7701c">#f7701c</color>
+    <color name="color_b9b9b9">#b9b9b9</color>
+    <color name="color_ff8f8d">#ff8f8d</color>
+    <color name="color_ff5f5c">#ff5f5c</color>
+    <color name="color_f5f5f5">#f5f5f5</color>
+    <color name="color_d8d8d8">#d8d8d8</color>
+    <color name="color_f42e3a">#f42e3a</color>
+    <color name="color_757575">#66757575</color>
+    <color name="color_282828">#282828</color>
+
+
+</resources>

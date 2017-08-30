@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <FrameLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:background="@color/color_ffffff"
+        tools:context="com.myweimai.doctor.views.account.guide.GuideActivity"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/layout_pointers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/d20"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" />
+
+        <ImageView
+            android:id="@+id/image_view_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="@dimen/d20"
+            android:src="@mipmap/bt_yindao_enter"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+</android.support.constraint.ConstraintLayout>

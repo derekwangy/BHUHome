@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="RedAgate">
+    </style>
+    <style name="RedAgate.WrapWidth.WrapHeight" parent="RedAgate">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 3.2.5 新版本细分割线 细 -->
+    <style name="split_line_fine" parent="RedAgate.WrapWidth.WrapHeight">
+        <item name="android:background">@color/color_f0f0f0</item>
+        <item name="android:layout_height">@dimen/d0.5</item>
+    </style>
+
+    <!-- 3.2.5 新版本分割线 宽 -->
+    <style name="split_line_wide" parent="RedAgate.WrapWidth.WrapHeight">
+        <item name="android:background">@color/color_f0f0f0</item>
+        <item name="android:layout_height">@dimen/d10</item>
+    </style>
+
+    <style name="list_cell_divider_horizontal">
+        <item name="android:background">@color/color_757575</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/dimens_0.5dp</item>
+    </style>
+
+</resources>

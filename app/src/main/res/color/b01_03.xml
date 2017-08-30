@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 不可点击是字体颜色 -->
+    <item android:color="#461a1a1a" android:state_enabled="false" />
+    <item android:color="@color/color_1a1a1a" android:state_pressed="true" />
+    <!-- 默认字体颜色 -->
+    <item android:color="@color/color_1a1a1a" />
+
+</selector>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtItemTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/d15"
+            android:paddingRight="@dimen/d15"
+            android:text="今日最新"
+            android:textColor="@color/color_666666"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/txtItemTab_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/d15"
+            android:paddingRight="@dimen/d15"
+            android:text="今日最新"
+            android:textColor="@color/color_f42e3a"
+            android:textSize="16dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/viewLine"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/color_f42e3a" />
+
+            <View
+                android:id="@+id/viewLineUnSelect"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_cccccc" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!--<TextView-->
+    <!--android:id="@+id/txtItemTab"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="15dp"-->
+    <!-- -->
+    <!--android:text="今日最新"-->
+    <!--android:gravity="center"-->
+    <!--android:textColor="@color/gray_7"-->
+    <!--android:textSize="16dp"-->
+    <!--/>-->
+
+
+    <!--<View-->
+    <!--android:id="@+id/viewLine"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="2dp"-->
+    <!--android:background="@color/textcolor_ff7200"-->
+    <!--/>-->
+    <!--<View-->
+    <!--android:id="@+id/viewLineUnSelect"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0.5dp"-->
+    <!--android:background="@color/color_e8e8e8"-->
+    <!--/>-->
+
+</LinearLayout>
