@@ -181,8 +181,9 @@ public class MallFragment extends BaseFragment implements OnStickyLayout {
     private ArrayList<MallIndexInfo.DataBean.GoodsListBean> getgoodsList(){
         ArrayList<MallIndexInfo.DataBean.GoodsListBean> goodsList = new ArrayList<>();
         MallIndexInfo.DataBean.GoodsListBean bean1 = new MallIndexInfo.DataBean.GoodsListBean();
-        bean1.setName("望远镜");
+        bean1.setName("志高空调");
         bean1.setPrice("20");
+        bean1.setSource("品质优越，质量上乘，节能省电……");
         bean1.setLink("http://www.baidu.com");
         bean1.setMainPic("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1504009716&di=b32c9a69f2f245f7f4d58746ce78777f&src=http://imgsrc.baidu.com/imgad/pic/item/9c16fdfaaf51f3de903def489eeef01f3a29790a.jpg");
         goodsList.add(bean1);
@@ -190,6 +191,7 @@ public class MallFragment extends BaseFragment implements OnStickyLayout {
         MallIndexInfo.DataBean.GoodsListBean bean2 = new MallIndexInfo.DataBean.GoodsListBean();
         bean2.setName("夏普空调");
         bean2.setPrice("520");
+        bean2.setSource("品质优越，质量上乘，节能省电……");
         bean2.setLink("http://www.baidu.com");
         bean2.setMainPic("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1504009716&di=b32c9a69f2f245f7f4d58746ce78777f&src=http://imgsrc.baidu.com/imgad/pic/item/9c16fdfaaf51f3de903def489eeef01f3a29790a.jpg");
         goodsList.add(bean2);
@@ -197,6 +199,7 @@ public class MallFragment extends BaseFragment implements OnStickyLayout {
         MallIndexInfo.DataBean.GoodsListBean bean3 = new MallIndexInfo.DataBean.GoodsListBean();
         bean3.setName("中央空调");
         bean3.setPrice("230");
+        bean3.setSource("品质优越，质量上乘，节能省电……");
         bean3.setLink("http://www.baidu.com");
         bean3.setMainPic("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1504009716&di=b32c9a69f2f245f7f4d58746ce78777f&src=http://imgsrc.baidu.com/imgad/pic/item/9c16fdfaaf51f3de903def489eeef01f3a29790a.jpg");
         goodsList.add(bean3);
@@ -204,6 +207,7 @@ public class MallFragment extends BaseFragment implements OnStickyLayout {
         MallIndexInfo.DataBean.GoodsListBean bean4 = new MallIndexInfo.DataBean.GoodsListBean();
         bean4.setName("格力空调");
         bean4.setPrice("340");
+        bean4.setSource("品质优越，质量上乘，节能省电……");
         bean4.setLink("http://www.baidu.com");
         bean4.setMainPic("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1504009716&di=b32c9a69f2f245f7f4d58746ce78777f&src=http://imgsrc.baidu.com/imgad/pic/item/9c16fdfaaf51f3de903def489eeef01f3a29790a.jpg");
         goodsList.add(bean4);

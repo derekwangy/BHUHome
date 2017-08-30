@@ -2,6 +2,7 @@ package com.bh.uhome.bhuhome.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     private TextView title_header_title_tv = null;
     private View parentView = null;
     private ImageView title_header_right1_iv = null;
+    private RecyclerView homeMenu,childHomeMenu;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,11 +37,16 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     private void initViews() {
         title_header_title_tv = parentView.findViewById(R.id.title_header_title_tv);
         title_header_right1_iv = parentView.findViewById(R.id.title_header_right1_iv);
+        homeMenu = parentView.findViewById(R.id.homeMenu);
+        childHomeMenu = parentView.findViewById(R.id.childHomeMenu);
+
     }
 
     private void initData() {
-        title_header_title_tv.setText("我的地址");
+        title_header_title_tv.setText("我的家");
         title_header_right1_iv.setVisibility(View.VISIBLE);
+
+
     }
 
     @Override
