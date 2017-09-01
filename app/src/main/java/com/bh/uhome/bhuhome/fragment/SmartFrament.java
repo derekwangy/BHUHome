@@ -2,7 +2,9 @@ package com.bh.uhome.bhuhome.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bh.uhome.bhuhome.R;
+import com.bh.uhome.bhuhome.adapter.GalleryGoodsAdapter;
+import com.bh.uhome.bhuhome.banner.MallIndexBanner;
+import com.bh.uhome.bhuhome.db.mockdata.MallFragmentData;
+import com.bh.uhome.bhuhome.db.mockdata.SmartFragment;
+import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
+import com.bh.uhome.bhuhome.entity.MallIndexInfo;
+import com.bh.uhome.bhuhome.recycleviewmanager.FullyLinearLayoutManager;
 import com.bh.uhome.lib.base.base.BaseFragment;
 import com.bh.uhome.lib.base.toast.ToastUtil;
+
+import java.util.ArrayList;
 
 
 /**
@@ -25,6 +36,8 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     private View parentView = null;
     private ImageView title_header_right1_iv = null;
     private RecyclerView homeMenu,childHomeMenu;
+    private GalleryGoodsAdapter homeMenuAdapter = null,childHomeMenuAdapter;
+    private MallIndexBanner mall_viewpager_banner = null;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,7 +52,7 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         title_header_right1_iv = parentView.findViewById(R.id.title_header_right1_iv);
         homeMenu = parentView.findViewById(R.id.homeMenu);
         childHomeMenu = parentView.findViewById(R.id.childHomeMenu);
-
+        mall_viewpager_banner = parentView.findViewById(R.id.mall_viewpager_banner);
     }
 
     private void initData() {
@@ -47,7 +60,59 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         title_header_right1_iv.setVisibility(View.VISIBLE);
 
 
+
+        setHomeMenuData();
+        setChildHomeMenuData();
+        setHomeAdBannerData();
     }
+
+    private void setHomeAdBannerData() {
+        mall_viewpager_banner.setSource(MallFragmentData.getBannersData())
+                .setIndicatorSelectorRes(R.drawable.dot_unfoucs, R.drawable.dot_foucs)
+                .startScroll();
+
+        mall_viewpager_banner.setOnItemClickL(new MallIndexBanner.OnItemClickL() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
+    }
+
+    private void setHomeMenuData(){
+        //设置布局管理器
+        FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        homeMenu.setLayoutManager(linearLayoutManager);
+
+        homeMenuAdapter = new GalleryGoodsAdapter(getActivity(), SmartFragment.getHomeMenuData(), new GalleryGoodsAdapter.OnRecyclerViewItemClickListener() {
+
+            @Override
+            public void onItemClick(HomeMenuInfo itemBean, int position) {
+
+            }
+
+        });
+        homeMenu.setAdapter(homeMenuAdapter);
+    }
+
+    private void setChildHomeMenuData(){
+        //设置布局管理器
+        FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        childHomeMenu.setLayoutManager(linearLayoutManager);
+
+        childHomeMenuAdapter = new GalleryGoodsAdapter(getActivity(), SmartFragment.getChildHomeMenuData(), new GalleryGoodsAdapter.OnRecyclerViewItemClickListener() {
+
+            @Override
+            public void onItemClick(HomeMenuInfo itemBean, int position) {
+
+            }
+
+        });
+        childHomeMenu.setAdapter(childHomeMenuAdapter);
+    }
+
 
     @Override
     public void onClick(View view) {

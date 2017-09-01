@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="notitle">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="RedAgate">
     </style>
     <style name="RedAgate.WrapWidth.WrapHeight" parent="RedAgate">

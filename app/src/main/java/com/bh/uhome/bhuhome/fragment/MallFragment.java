@@ -20,6 +20,7 @@ import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.adapter.MallIndexStickyAdapter;
 import com.bh.uhome.bhuhome.adapter.MallTabAdapter;
 import com.bh.uhome.bhuhome.banner.MallIndexBanner;
+import com.bh.uhome.bhuhome.db.mockdata.MallFragmentData;
 import com.bh.uhome.bhuhome.entity.BannerInfoBean;
 import com.bh.uhome.bhuhome.entity.MallIndexInfo;
 import com.bh.uhome.bhuhome.oninterface.OnStickyLayout;
@@ -88,7 +89,7 @@ public class MallFragment extends BaseFragment implements OnStickyLayout {
         title_header_right1_iv.setVisibility(View.VISIBLE);
         title_header_right1_iv.setBackgroundResource(R.mipmap.shopping_cart);
 
-        mall_viewpager_banner.setSource(getBannersData())
+        mall_viewpager_banner.setSource(MallFragmentData.getBannersData())
                 .setIndicatorSelectorRes(R.drawable.dot_unfoucs, R.drawable.dot_foucs)
                 .startScroll();
 
@@ -131,23 +132,7 @@ public class MallFragment extends BaseFragment implements OnStickyLayout {
         setTabData();
     }
 
-    private ArrayList<BannerInfoBean> getBannersData() {
-        banners = new ArrayList<>();
-        BannerInfoBean bean = new BannerInfoBean();
-        bean.setId("1");
-        bean.setImgId("http://pic.58pic.com/58pic/13/60/90/58Y58PICdIc_1024.jpg");
-        banners.add(bean);
-        BannerInfoBean bean1 = new BannerInfoBean();
-        bean1.setId("1");
-        bean1.setImgId("http://imgsrc.baidu.com/imgad/pic/item/267f9e2f07082838b5168c32b299a9014c08f1f9.jpg");
-        banners.add(bean1);
-        BannerInfoBean bean2 = new BannerInfoBean();
-        bean2.setId("1");
-        bean2.setImgId("http://pic.58pic.com/58pic/13/56/03/48858PICJU6_1024.jpg");
-        banners.add(bean2);
 
-        return banners;
-    }
 
 
     private void firstSetGoods(ArrayList<MallIndexInfo.DataBean.GoodsListBean> goodsList) {

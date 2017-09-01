@@ -9,7 +9,7 @@
         android:name=".app.AppApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@android:style/Theme.NoTitleBar">
         <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.launch.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,9 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.guide.GuideActivity"></activity>
-        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.LoginActivity"></activity>
-        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity"></activity>
+        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.guide.GuideActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.LoginActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
