@@ -127,6 +127,21 @@ public class MallFragment extends BaseFragment implements OnStickyLayout {
             }
         });
 
+        ptRefresh.setOnPullListener(new PullToRefreshLayout.OnPullListener() {
+            @Override
+            public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+                pageCur = 1;
+//                requestMallData();
+                ptRefresh.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+            }
+
+            @Override
+            public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+//                requestrecommendTags();
+                ptRefresh.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+            }
+        });
+
         firstSetGoods(null);
 
         setTabData();
@@ -152,95 +167,19 @@ public class MallFragment extends BaseFragment implements OnStickyLayout {
             }
         });
         mRecyclerView.setAdapter(mMallAdapter);
-        mMallAdapter.setDatas(getgoodsList());
+        mMallAdapter.setDatas(MallFragmentData.getgoodsList());
 
         if (goodsList != null) {
             pageCur++;
         }
 
         mMallAdapter.setHeaderView(headView);
-        tempGoodList = getgoodsList();
+        tempGoodList = MallFragmentData.getgoodsList();
 
     }
 
-    private ArrayList<MallIndexInfo.DataBean.GoodsListBean> getgoodsList(){
-        ArrayList<MallIndexInfo.DataBean.GoodsListBean> goodsList = new ArrayList<>();
-        MallIndexInfo.DataBean.GoodsListBean bean1 = new MallIndexInfo.DataBean.GoodsListBean();
-        bean1.setName("志高空调");
-        bean1.setPrice("20");
-        bean1.setSource("品质优越，质量上乘，节能省电……");
-        bean1.setLink("http://www.baidu.com");
-        bean1.setMainPic("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1504009716&di=b32c9a69f2f245f7f4d58746ce78777f&src=http://imgsrc.baidu.com/imgad/pic/item/9c16fdfaaf51f3de903def489eeef01f3a29790a.jpg");
-        goodsList.add(bean1);
-
-        MallIndexInfo.DataBean.GoodsListBean bean2 = new MallIndexInfo.DataBean.GoodsListBean();
-        bean2.setName("夏普空调");
-        bean2.setPrice("520");
-        bean2.setSource("品质优越，质量上乘，节能省电……");
-        bean2.setLink("http://www.baidu.com");
-        bean2.setMainPic("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1504009716&di=b32c9a69f2f245f7f4d58746ce78777f&src=http://imgsrc.baidu.com/imgad/pic/item/9c16fdfaaf51f3de903def489eeef01f3a29790a.jpg");
-        goodsList.add(bean2);
-
-        MallIndexInfo.DataBean.GoodsListBean bean3 = new MallIndexInfo.DataBean.GoodsListBean();
-        bean3.setName("中央空调");
-        bean3.setPrice("230");
-        bean3.setSource("品质优越，质量上乘，节能省电……");
-        bean3.setLink("http://www.baidu.com");
-        bean3.setMainPic("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1504009716&di=b32c9a69f2f245f7f4d58746ce78777f&src=http://imgsrc.baidu.com/imgad/pic/item/9c16fdfaaf51f3de903def489eeef01f3a29790a.jpg");
-        goodsList.add(bean3);
-
-        MallIndexInfo.DataBean.GoodsListBean bean4 = new MallIndexInfo.DataBean.GoodsListBean();
-        bean4.setName("格力空调");
-        bean4.setPrice("340");
-        bean4.setSource("品质优越，质量上乘，节能省电……");
-        bean4.setLink("http://www.baidu.com");
-        bean4.setMainPic("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1504009716&di=b32c9a69f2f245f7f4d58746ce78777f&src=http://imgsrc.baidu.com/imgad/pic/item/9c16fdfaaf51f3de903def489eeef01f3a29790a.jpg");
-        goodsList.add(bean4);
-
-        return goodsList;
-    }
-
-    private void setTabData(){
-
-        ArrayList<MallIndexInfo.DataBean.RecommendTagsBean> tagsBeans = new ArrayList<>();
-        MallIndexInfo.DataBean.RecommendTagsBean  bean1 = new MallIndexInfo.DataBean.RecommendTagsBean();
-        bean1.setName("推荐");
-        bean1.setLink("http://www.baidu.com");
-        tagsBeans.add(bean1);
-
-        MallIndexInfo.DataBean.RecommendTagsBean  bean2 = new MallIndexInfo.DataBean.RecommendTagsBean();
-        bean2.setName("空调");
-        bean2.setLink("http://www.baidu.com");
-        tagsBeans.add(bean2);
-
-        MallIndexInfo.DataBean.RecommendTagsBean  bean3 = new MallIndexInfo.DataBean.RecommendTagsBean();
-        bean3.setName("吸层器");
-        bean3.setLink("http://www.baidu.com");
-        tagsBeans.add(bean3);
-
-        MallIndexInfo.DataBean.RecommendTagsBean  bean4 = new MallIndexInfo.DataBean.RecommendTagsBean();
-        bean4.setName("望远镜");
-        bean4.setLink("http://www.baidu.com");
-        tagsBeans.add(bean4);
-
-        MallIndexInfo.DataBean.RecommendTagsBean  bean5 = new MallIndexInfo.DataBean.RecommendTagsBean();
-        bean5.setName("电饭锅");
-        bean5.setLink("http://www.baidu.com");
-        tagsBeans.add(bean5);
-
-        MallIndexInfo.DataBean.RecommendTagsBean  bean6 = new MallIndexInfo.DataBean.RecommendTagsBean();
-        bean6.setName("热水器");
-        bean6.setLink("http://www.baidu.com");
-        tagsBeans.add(bean6);
-
-        MallIndexInfo.DataBean.RecommendTagsBean  bean7 = new MallIndexInfo.DataBean.RecommendTagsBean();
-        bean7.setName("蒸锅");
-        bean7.setLink("http://www.baidu.com");
-        tagsBeans.add(bean7);
-
-
-
-
+    private  void setTabData() {
+        ArrayList<MallIndexInfo.DataBean.RecommendTagsBean> tagsBeans = MallFragmentData.getTabData();
         if (tagsBeans != null) {
         MyLinearLayoutManager myLinearLayoutManager = new MyLinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         tabRecyclerView.setLayoutManager(myLinearLayoutManager);

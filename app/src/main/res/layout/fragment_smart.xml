@@ -12,12 +12,21 @@
         android:id="@+id/txt_head_title"
         />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/txt_head_title"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
     <RelativeLayout
         android:id="@+id/rLaySky"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/color_ffffff"
-        android:layout_below="@+id/txt_head_title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
         <TextView
@@ -89,9 +98,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_18"
-                    android:paddingBottom="@dimen/dimens_2dp"
-                    android:paddingTop="@dimen/dimens_2dp"
+                    android:textSize="@dimen/font_16"
+                    android:paddingBottom="@dimen/dimens_1dp"
+                    android:paddingTop="@dimen/dimens_1dp"
                     android:paddingLeft="@dimen/dimens_20dp"
                     android:paddingRight="@dimen/dimens_20dp"
                     android:background="@drawable/shape_blue_rect_corners"
@@ -114,7 +123,7 @@
         android:id="@+id/rLayMenu"
         android:layout_below="@+id/rLaySky"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/d20"
+        android:layout_marginTop="@dimen/d10"
         android:background="@color/color_ffffff"
         android:layout_height="wrap_content">
         <TextView
@@ -138,7 +147,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/homeMenu"
-            android:layout_marginTop="@dimen/d20"
+            android:layout_marginTop="@dimen/d10"
             android:layout_below="@+id/txtTitleName"
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/dimens_20dp"
@@ -148,7 +157,7 @@
         <View
             android:id="@+id/viewSpace"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_10dp"
+            android:layout_height="@dimen/dimens_5dp"
             android:layout_below="@+id/homeMenu"
             android:background="@color/color_f5f5f5"/>
 
@@ -181,7 +190,7 @@
         android:layout_below="@+id/rLayMenu"
         android:layout_marginLeft="@dimen/dimens_15dp"
         android:layout_marginRight="@dimen/dimens_15dp"
-        android:layout_marginTop="@dimen/dimens_20dp"
+        android:layout_marginTop="@dimen/dimens_10dp"
         android:visibility="visible"
         android:layout_height="wrap_content">
 
@@ -192,5 +201,12 @@
             banner:bb_scale="0.534"/>
 
     </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@+id/framViewPager"
+        android:layout_height="@dimen/dimens_20dp"/>
 
+        </RelativeLayout>
+
+    </ScrollView>
 </RelativeLayout>

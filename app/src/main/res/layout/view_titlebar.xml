@@ -162,6 +162,7 @@
                         android:layout_gravity="center"
                         android:gravity="center_vertical"
                         android:padding="@dimen/dimens_10dp"
+                        android:layout_marginRight="@dimen/dimens_5dp"
                         android:paddingLeft="@dimen/dimens_5dp"
                         android:background="@mipmap/img_add_tag"
                         android:visibility="gone" />

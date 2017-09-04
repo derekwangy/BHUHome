@@ -23,7 +23,7 @@ public class GuideActivity extends BaseActivity implements GuideContract.IGuideV
     private GuideContract.IGuidePresenter mPresenter;
 
     private static final String KEY_ONLINE = "key_online";
-    private int[] images = new int[]{R.mipmap.bg_yindao1_and, R.mipmap.bg_yindao2_and,R.mipmap.bg_yindao3_and};
+    private int[] images = new int[]{R.mipmap.guide_one, R.mipmap.guide_two,R.mipmap.guide_three};
     private LinearLayout layoutPointers;
     private ImageView imageButton;
     private ViewPager viewPager = null;

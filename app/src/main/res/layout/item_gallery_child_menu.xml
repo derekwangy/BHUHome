@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imageGalleryItem"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/ic_baoyuefuwu"
@@ -24,7 +24,7 @@
         android:singleLine="true"
         android:layout_marginTop="6dp"
         android:text="some info"
-        android:textSize="16dp" />
+        android:textSize="14dp" />
 <View
     android:layout_width="match_parent"
     android:layout_below="@+id/txtGalleryGoodsName"

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bh.uhome.bhuhome.R;
+import com.bh.uhome.bhuhome.adapter.GalleryChildMenuAdapter;
 import com.bh.uhome.bhuhome.adapter.GalleryGoodsAdapter;
 import com.bh.uhome.bhuhome.banner.MallIndexBanner;
 import com.bh.uhome.bhuhome.db.mockdata.MallFragmentData;
@@ -36,7 +37,8 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     private View parentView = null;
     private ImageView title_header_right1_iv = null;
     private RecyclerView homeMenu,childHomeMenu;
-    private GalleryGoodsAdapter homeMenuAdapter = null,childHomeMenuAdapter;
+    private GalleryGoodsAdapter homeMenuAdapter = null;
+    private GalleryChildMenuAdapter childHomeMenuAdapter = null;
     private MallIndexBanner mall_viewpager_banner = null;
     @Nullable
     @Override
@@ -89,7 +91,7 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
 
             @Override
             public void onItemClick(HomeMenuInfo itemBean, int position) {
-
+                ToastUtil.showShort(getActivity(),itemBean.getName());
             }
 
         });
@@ -102,11 +104,11 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         childHomeMenu.setLayoutManager(linearLayoutManager);
 
-        childHomeMenuAdapter = new GalleryGoodsAdapter(getActivity(), SmartFragment.getChildHomeMenuData(), new GalleryGoodsAdapter.OnRecyclerViewItemClickListener() {
+        childHomeMenuAdapter = new GalleryChildMenuAdapter(getActivity(), SmartFragment.getChildHomeMenuData(), new GalleryChildMenuAdapter.OnRecyclerViewItemClickListener() {
 
             @Override
             public void onItemClick(HomeMenuInfo itemBean, int position) {
-
+                ToastUtil.showShort(getActivity(),itemBean.getName());
             }
 
         });
