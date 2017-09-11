@@ -1,6 +1,8 @@
 package com.bh.uhome.bhuhome.util;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.widget.Toast;
 
 /**
@@ -25,5 +27,23 @@ public class CommonUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取版本编号，更新版本使用
+     *
+     * @param mContext
+     * @return
+     */
+    public static int getAppVersionCode(Context mContext) {
+        int versionCodeLocal = 0;
+        try {
+            PackageManager pm = mContext.getPackageManager();//context为当前Activity上下文
+            PackageInfo pi = pm.getPackageInfo(mContext.getPackageName(), 0);
+            versionCodeLocal = pi.versionCode;//版本升级用
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionCodeLocal;
     }
 }

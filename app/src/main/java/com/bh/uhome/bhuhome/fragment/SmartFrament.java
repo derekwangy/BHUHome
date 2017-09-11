@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,11 @@ import com.bh.uhome.bhuhome.adapter.GalleryChildMenuAdapter;
 import com.bh.uhome.bhuhome.adapter.GalleryGoodsAdapter;
 import com.bh.uhome.bhuhome.banner.MallIndexBanner;
 import com.bh.uhome.bhuhome.db.mockdata.MallFragmentData;
-import com.bh.uhome.bhuhome.db.mockdata.SmartFragment;
+import com.bh.uhome.bhuhome.db.mockdata.SmartFragmentData;
 import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
-import com.bh.uhome.bhuhome.entity.MallIndexInfo;
 import com.bh.uhome.bhuhome.recycleviewmanager.FullyLinearLayoutManager;
 import com.bh.uhome.lib.base.base.BaseFragment;
 import com.bh.uhome.lib.base.toast.ToastUtil;
-
-import java.util.ArrayList;
 
 
 /**
@@ -66,6 +62,8 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         setHomeMenuData();
         setChildHomeMenuData();
         setHomeAdBannerData();
+        SmartFragmentData.getData();
+
     }
 
     private void setHomeAdBannerData() {
@@ -87,7 +85,7 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         homeMenu.setLayoutManager(linearLayoutManager);
 
-        homeMenuAdapter = new GalleryGoodsAdapter(getActivity(), SmartFragment.getHomeMenuData(), new GalleryGoodsAdapter.OnRecyclerViewItemClickListener() {
+        homeMenuAdapter = new GalleryGoodsAdapter(getActivity(), SmartFragmentData.getHomeMenuData(), new GalleryGoodsAdapter.OnRecyclerViewItemClickListener() {
 
             @Override
             public void onItemClick(HomeMenuInfo itemBean, int position) {
@@ -104,7 +102,7 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         childHomeMenu.setLayoutManager(linearLayoutManager);
 
-        childHomeMenuAdapter = new GalleryChildMenuAdapter(getActivity(), SmartFragment.getChildHomeMenuData(), new GalleryChildMenuAdapter.OnRecyclerViewItemClickListener() {
+        childHomeMenuAdapter = new GalleryChildMenuAdapter(getActivity(), SmartFragmentData.getChildHomeMenuData(), new GalleryChildMenuAdapter.OnRecyclerViewItemClickListener() {
 
             @Override
             public void onItemClick(HomeMenuInfo itemBean, int position) {

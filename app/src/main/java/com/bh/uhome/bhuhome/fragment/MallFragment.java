@@ -82,6 +82,7 @@ public class MallFragment extends BaseFragment implements OnStickyLayout {
         mall_viewpager_banner = headView.findViewById(R.id.mall_viewpager_banner);
         framViewPager = (FrameLayout) headView.findViewById(R.id.framViewPager);
         placeHolderView = headView.findViewById(R.id.place_holder);
+        placeHolderView.setVisibility(View.GONE);
     }
 
     private void initData() {
@@ -210,6 +211,9 @@ public class MallFragment extends BaseFragment implements OnStickyLayout {
         mStickyView.setVisibility(View.GONE);
         placeHolderView.setVisibility(View.GONE);
     }
+
+        mStickyView.setVisibility(View.GONE);
+        placeHolderView.setVisibility(View.GONE);
 
 }
 

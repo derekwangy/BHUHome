@@ -24,7 +24,7 @@
         android:singleLine="true"
         android:layout_marginTop="6dp"
         android:text="some info"
-        android:textSize="14dp" />
+        android:textSize="12dp" />
 <View
     android:layout_width="match_parent"
     android:layout_below="@+id/txtGalleryGoodsName"

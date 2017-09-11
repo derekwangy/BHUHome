@@ -7,8 +7,18 @@ package com.bh.uhome.bhuhome.entity;
  * @description Describe
  */
 public class HomeMenuInfo {
+    private String id;
     private String name;
+    private String state; //开关状态 0关，1开
     private String imgUrl;
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public String getName() {
         return name;
@@ -18,11 +28,19 @@ public class HomeMenuInfo {
         this.name = name;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getId() {
+        return id;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

@@ -9,10 +9,12 @@ import android.widget.RadioGroup;
 
 import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.adapter.FragPagerAdapter;
+import com.bh.uhome.bhuhome.entity.MainAdsInfo;
 import com.bh.uhome.bhuhome.fragment.MallFragment;
 import com.bh.uhome.bhuhome.fragment.MyFragment;
 import com.bh.uhome.bhuhome.fragment.SmartFrament;
 import com.bh.uhome.bhuhome.util.CommonUtil;
+import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
 import com.bh.uhome.bhuhome.widget.UnScrollViewPager;
 import com.bh.uhome.lib.base.base.BaseActivity;
 
@@ -93,6 +95,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         viewPager.setAdapter(mFragPagerAdapter);
         radioGroup.setOnCheckedChangeListener(this);
         ((RadioButton) radioGroup.getChildAt(pageIndex)).setChecked(true);
+
+//        checkVersion();
     }
 
     @Override
@@ -115,6 +119,30 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     public void hideLoadingView() {
 
     }
+
+    /**
+     * 检查版本更新
+     */
+    public void checkVersion() {
+        MainAdsInfo mainAdsInfo = new MainAdsInfo();
+        MainAdsInfo.AdsData data = new MainAdsInfo.AdsData();
+        mainAdsInfo.setData(data);
+        mainAdsInfo.getData().getVersion().setDownloadUrl("http://update.myweimai.com/wemay.apk");
+        mainAdsInfo.getData().getVersion().setUpdateType("0");
+        mainAdsInfo.getData().getVersion().setVersionCode(2);
+        mainAdsInfo.getData().getVersion().setVersionName("1.0.1");
+
+        try {
+            int localVersionCode = CommonUtil.getAppVersionCode(this);
+            int dbVersionCode = mainAdsInfo.getData().getVersion().getVersionCode();
+            if (dbVersionCode > localVersionCode) {
+                new UpdateVersionUtil(this, mainAdsInfo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

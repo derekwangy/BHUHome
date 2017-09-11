@@ -48,7 +48,7 @@ public class SmartHomeBanner extends BaseIndicatorBanner<BannerInfoBean, SmartHo
 
         final BannerInfoBean item = mDatas.get(position);
         int itemWidth = mDisplayMetrics.widthPixels;
-        int itemHeight = (int) (itemWidth * 400 * 1.0f / 750);
+        int itemHeight = (int) (itemWidth * 400 * 1.0f / 300);
         iv.setScaleType(ImageView.ScaleType.FIT_XY);
         iv.setLayoutParams(new LinearLayout.LayoutParams(itemWidth, itemHeight));
 

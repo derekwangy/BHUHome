@@ -16,7 +16,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d5"
+        android:layout_height="@dimen/dimens_10dp"
         android:background="@color/color_ff5f5c"
-        android:visibility="gone" />
+        android:visibility="visible" />
 </LinearLayout>

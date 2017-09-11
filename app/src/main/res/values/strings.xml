@@ -36,4 +36,19 @@
     <string name="help_center">帮助中心</string>
     <string name="online_service">在线客服</string>
 
+    <string name="mine_latest_version">当前已是最新版本</string>
+    <string name="mine_ensure_version">请点击确定进行更新！</string>
+    <string name="mine_version_update">版本更新</string>
+    <string name="mine_version_latest">最新版本为</string>
+    <string name="mine_version_update_ornot">您是否更新?</string>
+    <string name="mine_version_notcare">忽略</string>
+
+    <!--apk下载-->
+    <string name="download_preview">准备下载……</string>
+    <string name="download_start">开始下载</string>
+    <string name="download_doing">BH下载中……</string>
+    <string name="download_finish">下载完成,点击安装</string>
+    <string name="download_failed">下载失败!</string>
+    <string name="download_progress">下载进度</string>
+
 </resources>
