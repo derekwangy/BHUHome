@@ -41,4 +41,5 @@
         <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
     </style>
 
+
 </resources>

@@ -8,5 +8,5 @@ package com.bh.uhome.bhuhome.constant;
  */
 public class APPConstant {
     //引导页标识
-    public static boolean isFirstLaunch = true;
+    public static boolean isFirstLaunch = false;
 }

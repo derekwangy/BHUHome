@@ -3,6 +3,7 @@ package com.bh.uhome.bhuhome.util;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 /**
@@ -12,6 +13,19 @@ import android.widget.Toast;
  * @description Describe
  */
 public class CommonUtil {
+
+    public static boolean isNull(String... strings) {
+            if (null == strings) {
+                return true;
+            }
+            for (String string : strings) {
+                if (TextUtils.isEmpty(string)) {
+                    return true;
+                }
+            }
+        return false;
+    }
+
     private static long exitTime = 0;
 
     public static void exit(Context mContext) {

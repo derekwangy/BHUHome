@@ -1,5 +1,7 @@
 package com.bh.uhome.bhuhome.fragment;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +19,12 @@ import com.bh.uhome.bhuhome.banner.MallIndexBanner;
 import com.bh.uhome.bhuhome.db.mockdata.MallFragmentData;
 import com.bh.uhome.bhuhome.db.mockdata.SmartFragmentData;
 import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
+import com.bh.uhome.bhuhome.entity.VersionInfo;
 import com.bh.uhome.bhuhome.recycleviewmanager.FullyLinearLayoutManager;
+import com.bh.uhome.bhuhome.service.UpdateVersionService;
+import com.bh.uhome.bhuhome.util.CommonUtil;
+import com.bh.uhome.bhuhome.util.UIUtils;
+import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
 import com.bh.uhome.lib.base.base.BaseFragment;
 import com.bh.uhome.lib.base.toast.ToastUtil;
 
@@ -57,12 +64,12 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         title_header_title_tv.setText("我的家");
         title_header_right1_iv.setVisibility(View.VISIBLE);
 
-
-
         setHomeMenuData();
         setChildHomeMenuData();
         setHomeAdBannerData();
         SmartFragmentData.getData();
+
+        checkVersion();
 
     }
 
@@ -113,6 +120,70 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         childHomeMenu.setAdapter(childHomeMenuAdapter);
     }
 
+    /**
+     * 检查版本更新
+     */
+    public void checkVersion() {
+        VersionInfo info = SmartFragmentData.getVersionData();
+
+        try {
+            int localVersionCode = CommonUtil.getAppVersionCode(getActivity());
+            int dbVersionCode = info.getVersionCode();
+            if (dbVersionCode > localVersionCode) {
+                new UpdateVersionUtil(getActivity(), info);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+      /*  try{
+        String versionNameDB = "1.0";
+        final String downUrl = "http://139.224.116.55:8080/webside/resources/apk/yijia.apk";
+        final AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        // 设置触摸对话框以外的地方取消对话框  true:点击dialog之外和back键关闭  false:点击dialog之外不关闭  20160303 申鹏修改
+        alertDialog.setCanceledOnTouchOutside(false);
+//          alertDialog.setCancelable(false);//设置触摸对话框以外的地方取消对话框  true:点击dialog之外和back键关闭  false:点击dialog之外和back键都不关闭  20160303 申鹏修改
+        alertDialog.show();
+        alertDialog.getWindow().setContentView(R.layout.dialog_update_version_new);
+
+        TextView txtVersionInfo = (TextView) alertDialog.getWindow()
+                .findViewById(R.id.txtVersionInfo);
+        txtVersionInfo.setText(UIUtils.getString(R.string.mine_version_latest) + versionNameDB +
+                "," + UIUtils.getString(R.string.mine_version_update_ornot));
+        //确定
+        alertDialog.getWindow()
+                .findViewById(R.id.dialog_confirm_tv)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent serviceIntent = new Intent(getActivity(), UpdateVersionService.class);
+                        serviceIntent.putExtra("url", downUrl);
+                        getActivity().startService(serviceIntent);
+
+                        if (alertDialog != null){
+                            alertDialog.dismiss();
+                        }
+                    }
+
+                });
+        //忽略
+        alertDialog.getWindow()
+                .findViewById(R.id.dialog_cancel_tv)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        if (!updateType.equals(UPDATE_TYPE_TAG)) { //  非强制更新
+//                            saveSharefVersionCode();
+//                            alertDialog.dismiss();
+//                        } else {
+//                            ToastUtil.showLong(mActivity, mActivity.getResources().getString(R.string.mine_ensure_version));
+//                        }
+                    }
+
+                });
+    } catch (Exception e) {
+        e.printStackTrace();
+    }*/
+    }
 
     @Override
     public void onClick(View view) {

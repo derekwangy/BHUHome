@@ -3,10 +3,10 @@ package com.bh.uhome.bhuhome.db.mockdata;
 import android.util.Log;
 
 import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
+import com.bh.uhome.bhuhome.entity.MainAdsInfo;
+import com.bh.uhome.bhuhome.entity.VersionInfo;
 import com.google.gson.JsonArray;
 
-
-import net.sf.json.JSONArray;
 
 import org.json.JSONObject;
 
@@ -20,6 +20,15 @@ import java.util.List;
  * @description Describe
  */
 public class SmartFragmentData {
+
+    public static VersionInfo getVersionData(){
+        VersionInfo  version = new VersionInfo();
+        version.setVersionName("1.0.1");
+        version.setVersionCode(2);
+        version.setUpdateType("0");
+        version.setDownloadUrl("http://139.224.116.55:8080/webside/resources/apk/yijia.apk");
+        return version;
+    }
 
     public static ArrayList<HomeMenuInfo> getHomeMenuData(){
         ArrayList<HomeMenuInfo> list = new ArrayList<>();

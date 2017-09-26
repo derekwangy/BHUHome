@@ -6,9 +6,11 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.RemoteViews;
 import java.io.IOException;
@@ -17,6 +19,7 @@ import android.support.annotation.Nullable;
 
 import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.util.FileUtil;
+import com.google.gson.annotations.Expose;
 
 import java.io.File;
 import okhttp3.Call;
@@ -38,7 +41,7 @@ public class UpdateVersionService extends Service {
     private Notification myNotify;
     private int notificationId = 1234;
     private String url;
-    private String apkName = "yuyueandroid.apk";
+    private String apkName = "bhuhome.apk";
 
     public static final int DOWN_SUCCESS = 101;   //下载成功
     public static final int DOWN_FAILED = 102;    //下载失败
@@ -70,13 +73,13 @@ public class UpdateVersionService extends Service {
 
 
                     //下载完成,点击可以去安装文件
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_VIEW);// android.intent.action.VIEW
-                    intent.setDataAndType(Uri.fromFile(new File(FileUtil.getPath() + apkName)),
-                            "application/vnd.android.package-archive");
-                    myNotify.flags = Notification.FLAG_AUTO_CANCEL;
-                    myNotify.contentIntent = PendingIntent.getActivity(UpdateVersionService.this, 1, intent, 0);
-                    notificationManager.notify(notificationId, myNotify);
+//                    Intent intent = new Intent();
+//                    intent.setAction(Intent.ACTION_VIEW);// android.intent.action.VIEW
+//                    intent.setDataAndType(Uri.fromFile(new File(FileUtil.getPath() + apkName)),
+//                            "application/vnd.android.package-archive");
+//                    myNotify.flags = Notification.FLAG_AUTO_CANCEL;
+//                    myNotify.contentIntent = PendingIntent.getActivity(UpdateVersionService.this, 1, intent, 0);
+//                    notificationManager.notify(notificationId, myNotify);
 
                     installAPK();
 
@@ -120,6 +123,7 @@ public class UpdateVersionService extends Service {
 
         myNotify.contentView = rv;
         notificationManager.notify(notificationId, myNotify);
+
     }
 
     @Override
@@ -136,7 +140,7 @@ public class UpdateVersionService extends Service {
             url = intent.getStringExtra("url");
             init();
         }
-
+        Expose nd;
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -145,9 +149,32 @@ public class UpdateVersionService extends Service {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(FileUtil.getPath() + apkName)),"application/vnd.android.package-archive");
+                Uri uri=null;
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(getApplicationContext(), "com.bh.uhome.bhuhome.FileProvider", new File(FileUtil.getPath() + apkName));
+        } else {
+            uri = Uri.fromFile(new File(FileUtil.getPath() + apkName));
+        }
+
+        intent.setDataAndType(uri,"application/vnd.android.package-archive");
+//        intent.setDataAndType(Uri.fromFile(new File(FileUtil.getPath() + apkName)),"application/vnd.android.package-archive");
         getApplicationContext().startActivity(intent);
 
+//        String filePath = FileUtil.getPath() + apkName;
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+////        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//        intent.setAction(Intent.ACTION_VIEW);
+//
+//        Uri uri=null;
+//        if (Build.VERSION.SDK_INT >= 24) {
+//            uri = FileProvider.getUriForFile(getApplicationContext(), "com.bh.uhome.bhuhome.FileProvider", new File(filePath));
+//        } else {
+//            uri = Uri.fromFile(new File(filePath));
+//        }
+//
+//        intent.setDataAndType(uri,"application/vnd.android.package-archive");
+//        getApplicationContext().startActivity(intent);
     }
 
 

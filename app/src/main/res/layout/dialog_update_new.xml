@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/shape_white_solid_corners"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimens_20dp"
+        android:layout_marginTop="@dimen/dimens_20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/selector_dialog_right_btn_bg"
+        android:gravity="center"
+        android:text="版本更新！"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/dimens_18dp" />
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_0.5dp"
+        android:layout_marginTop="@dimen/dimens_10dp"
+        android:layout_below="@+id/txtTitle"
+        android:background="@color/color_cccccc"
+        />
+    <TextView
+        android:id="@+id/txtVersionInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/viewLine"
+        android:layout_marginTop="@dimen/dimens_10dp"
+        android:layout_marginBottom="@dimen/dimens_10dp"
+        android:layout_marginLeft="@dimen/dimens_25dp"
+        android:layout_marginRight="@dimen/dimens_25dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        tools:text="当前版本号1.0.1"
+        android:textColor="@color/color_666666"
+        android:textSize="@dimen/dimens_16dp" />
+    <View
+        android:id="@+id/viewLine2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_0.5dp"
+        android:layout_marginTop="@dimen/dimens_10dp"
+        android:layout_below="@+id/txtVersionInfo"
+        android:background="@color/color_cccccc"
+        />
+    <LinearLayout
+        android:layout_below="@+id/viewLine2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dialog_cancel_tv"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimens_50dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_dialog_left_btn_bg"
+            android:gravity="center"
+            android:text="忽略"
+            android:textColor="@color/color_959595"
+            android:textSize="@dimen/dimens_16dp" />
+
+        <TextView
+            android:layout_width="@dimen/dimens_0.5dp"
+            android:layout_height="@dimen/dimens_50dp"
+            android:layout_weight="0"
+            android:background="@color/color_cccccc" />
+
+        <TextView
+            android:id="@+id/dialog_confirm_tv"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimens_50dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_dialog_right_btn_bg"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/dimens_16dp" />
+    </LinearLayout>
+</RelativeLayout>

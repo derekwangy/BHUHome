@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @description Describe
  */
 public class MallFragmentData {
-
+    //  ……/MallFragmentData/getBannersData
     public static ArrayList<BannerInfoBean> getBannersData() {
         ArrayList<BannerInfoBean> banners = new ArrayList<>();
         BannerInfoBean bean = new BannerInfoBean();

@@ -22,8 +22,24 @@
         <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.LoginActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            ></activity>
+
+        <service android:name=".service.UpdateVersionService" android:exported="true" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.bh.uhome.bhuhome.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
     </application>
+
+
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />

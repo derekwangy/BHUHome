@@ -129,7 +129,7 @@ public class FileUtil {
     }
 
     public static String getPath() {
-        return Environment.getExternalStorageDirectory() + "/houpixApk/";
+        return Environment.getExternalStorageDirectory() + "/bhApk/";
     }
 
 

@@ -10,6 +10,9 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // Enabling multidex support.
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -35,4 +38,5 @@ dependencies {
     compile project(path: ':FlycoBanner_Lib')
     compile 'com.github.bumptech.glide:glide:4.0.0'
     compile 'com.android.support:recyclerview-v7:26.+'
+    compile 'com.android.support:multidex:1.0.0'
 }

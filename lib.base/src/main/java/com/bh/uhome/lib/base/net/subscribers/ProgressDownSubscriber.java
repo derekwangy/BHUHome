@@ -10,6 +10,7 @@ import com.bh.uhome.lib.base.net.utils.DbDownUtil;
 import java.lang.ref.SoftReference;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+
 import rx.functions.Action1;
 
 /**
