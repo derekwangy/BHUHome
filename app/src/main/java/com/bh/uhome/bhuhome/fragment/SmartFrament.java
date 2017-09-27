@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bh.uhome.bhuhome.R;
+import com.bh.uhome.bhuhome.activity.mine.AboutUsActivity;
 import com.bh.uhome.bhuhome.adapter.GalleryChildMenuAdapter;
 import com.bh.uhome.bhuhome.adapter.GalleryGoodsAdapter;
 import com.bh.uhome.bhuhome.banner.MallIndexBanner;
@@ -114,6 +115,8 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
             @Override
             public void onItemClick(HomeMenuInfo itemBean, int position) {
                 ToastUtil.showShort(getActivity(),itemBean.getName());
+                Intent mIntent = new Intent(getActivity(), AboutUsActivity.class);
+                startActivity(mIntent);
             }
 
         });

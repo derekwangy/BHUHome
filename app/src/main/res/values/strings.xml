@@ -35,6 +35,7 @@
     <string name="device_manage">设备管理</string>
     <string name="help_center">帮助中心</string>
     <string name="online_service">在线客服</string>
+    <string name="about_us">关于我们</string>
 
     <string name="mine_latest_version">当前已是最新版本</string>
     <string name="mine_ensure_version">请点击确定进行更新！</string>
@@ -51,4 +52,10 @@
     <string name="download_failed">下载失败!</string>
     <string name="download_progress">下载进度</string>
 
+    <!--关于我们-->
+    <string name="string_feedback">意见反馈</string>
+    <string name="string_function_is_introduced">功能介绍</string>
+    <string name="string_user_agreement">用户协议</string>
+    <string name="string_give_us_score">给我们评分</string>
+    <string name="string_copyright">苏州金石 版权所有\n(C)2017 suzhoujinshi Technology Inc.</string>
 </resources>

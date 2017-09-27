@@ -24,6 +24,9 @@
         <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity"
             android:screenOrientation="portrait"
             ></activity>
+        <activity android:name=".activity.mine.AboutUsActivity"
+            android:screenOrientation="portrait"></activity>
+
 
         <service android:name=".service.UpdateVersionService" />
 

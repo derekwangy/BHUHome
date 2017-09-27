@@ -44,6 +44,7 @@
         android:orientation="vertical">
         <!--消息中心-->
         <RelativeLayout
+            android:id="@+id/rLay_msg_center"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_50dp"
@@ -83,6 +84,7 @@
             android:background="@color/color_f5f5f5"/>
         <!--设备管理-->
         <RelativeLayout
+            android:id="@+id/rLay_device_manage"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_50dp"
@@ -122,6 +124,7 @@
             android:background="@color/color_f5f5f5"/>
         <!--帮助中心-->
         <RelativeLayout
+            android:id="@+id/rLay_help_center"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_50dp"
@@ -161,6 +164,7 @@
             android:background="@color/color_f5f5f5"/>
         <!--在线客服-->
         <RelativeLayout
+            android:id="@+id/rLay_online_service"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_50dp"
@@ -193,6 +197,47 @@
                 android:textColor="@color/color_1a1a1a"
                 android:textSize="@dimen/d16"
                 android:text="@string/online_service" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_1dp"
+            android:background="@color/color_f5f5f5"/>
+        <!--关于我们-->
+        <RelativeLayout
+            android:id="@+id/rLay_about_us"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_50dp"
+            android:background="@color/color_ffffff">
+
+            <!-- item_icon -->
+            <ImageView
+                android:id="@+id/icon_about_us"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/text_about_us"
+                android:layout_alignTop="@+id/text_about_us"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/d15"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_zhengzhuang" />
+
+            <!-- title -->
+            <TextView
+                android:id="@+id/text_about_us"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/icon_about_us"
+                android:drawableEnd="@mipmap/ic_list_rightarrow"
+                android:drawableRight="@mipmap/ic_list_rightarrow"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:paddingLeft="@dimen/d5"
+                android:paddingRight="@dimen/d15"
+                android:textColor="@color/color_1a1a1a"
+                android:textSize="@dimen/d16"
+                android:text="@string/about_us" />
         </RelativeLayout>
 
     </LinearLayout>

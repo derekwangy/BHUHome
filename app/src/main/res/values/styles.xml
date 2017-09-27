@@ -41,5 +41,21 @@
         <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
     </style>
 
+    <!-- 通用 条目左边没有图标的textView， 设置、我fragment中没有图标的条目中的TextView使用该style -->
+    <style name="text_view_no_icon">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/d15</item>
+        <item name="android:paddingLeft">@dimen/d15</item>
+        <item name="android:paddingRight">@dimen/d15</item>
+        <item name="android:textSize">@dimen/font_16</item>
+        <item name="android:background">@color/color_ffffff</item>
+        <item name="android:textColor">@color/color_1a1a1a</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 
+    <!-- 灰色线条 -->
+    <style name="gray_line" parent="RedAgate.WrapWidth.WrapHeight">
+        <item name="android:background">@color/color_dfdfdf</item>
+        <item name="android:layout_height">@dimen/d0.5</item>
+    </style>
 </resources>
