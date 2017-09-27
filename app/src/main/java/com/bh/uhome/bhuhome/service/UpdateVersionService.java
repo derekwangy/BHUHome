@@ -148,33 +148,17 @@ public class UpdateVersionService extends Service {
     private void installAPK() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.setAction(Intent.ACTION_VIEW);
-                Uri uri=null;
+        Uri uri=null;
         if (Build.VERSION.SDK_INT >= 24) {
             uri = FileProvider.getUriForFile(getApplicationContext(), "com.bh.uhome.bhuhome.FileProvider", new File(FileUtil.getPath() + apkName));
         } else {
             uri = Uri.fromFile(new File(FileUtil.getPath() + apkName));
         }
-
         intent.setDataAndType(uri,"application/vnd.android.package-archive");
-//        intent.setDataAndType(Uri.fromFile(new File(FileUtil.getPath() + apkName)),"application/vnd.android.package-archive");
         getApplicationContext().startActivity(intent);
 
-//        String filePath = FileUtil.getPath() + apkName;
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-////        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//        intent.setAction(Intent.ACTION_VIEW);
-//
-//        Uri uri=null;
-//        if (Build.VERSION.SDK_INT >= 24) {
-//            uri = FileProvider.getUriForFile(getApplicationContext(), "com.bh.uhome.bhuhome.FileProvider", new File(filePath));
-//        } else {
-//            uri = Uri.fromFile(new File(filePath));
-//        }
-//
-//        intent.setDataAndType(uri,"application/vnd.android.package-archive");
-//        getApplicationContext().startActivity(intent);
     }
 
 
@@ -201,8 +185,21 @@ public class UpdateVersionService extends Service {
                             throw new IOException("Unexpected code " + response);
                         InputStream is = response.body().byteStream(); //成功的回调中拿到字节流
                         String path = FileUtil.getPath();
+
+
+
+//                        Uri uri=null;
+//                        if (Build.VERSION.SDK_INT >= 24) {
+//                            uri = FileProvider.getUriForFile(getApplicationContext(), "com.bh.uhome.bhuhome.FileProvider", new File(FileUtil.getPath()));
+//                        } else {
+//                            uri = Uri.fromFile(new File(FileUtil.getPath()));
+//                        }
+//
+//                        grantUriPermission("com.bh.uhome.bhuhome",uri , Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                                | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
                         long fileLength = response.body().contentLength(); //获取文件长度
-                        FileUtil.saveFile(is, path, apkName, mHandler, fileLength); //保存下载的apk文件
+                        FileUtil.saveFile(is, path.toString(), apkName, mHandler, fileLength); //保存下载的apk文件
                     }
 
                 });

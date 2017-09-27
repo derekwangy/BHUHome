@@ -25,7 +25,7 @@
             android:screenOrientation="portrait"
             ></activity>
 
-        <service android:name=".service.UpdateVersionService" android:exported="true" />
+        <service android:name=".service.UpdateVersionService" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -38,10 +38,10 @@
         </provider>
     </application>
 
-
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- "访问WiFi网络状态"权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- "访问数据网络状态"权限 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /> <!-- "改变网络状态"权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

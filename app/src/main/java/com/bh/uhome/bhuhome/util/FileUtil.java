@@ -1,8 +1,11 @@
 package com.bh.uhome.bhuhome.util;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
