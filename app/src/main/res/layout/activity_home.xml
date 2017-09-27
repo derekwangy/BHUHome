@@ -44,19 +44,19 @@
                 android:textColor="@drawable/home_tab_text_color_selector"
                 android:textSize="13dp"/>
 
-            <RadioButton
-                android:id="@+id/radio_two"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/color_ffffff"
-                android:button="@null"
-                android:drawableTop="@drawable/health_select"
-                android:gravity="center_horizontal"
-                android:text="@string/string_home_activity_health"
-                android:visibility="gone"
-                android:textColor="@drawable/home_tab_text_color_selector"
-                android:textSize="13dp"/>
+            <!--<RadioButton-->
+                <!--android:id="@+id/radio_two"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@color/color_ffffff"-->
+                <!--android:button="@null"-->
+                <!--android:drawableTop="@drawable/health_select"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="@string/string_home_activity_health"-->
+                <!--android:visibility="gone"-->
+                <!--android:textColor="@drawable/home_tab_text_color_selector"-->
+                <!--android:textSize="13dp"/>-->
 
             <RadioButton
                 android:id="@+id/radio_three"

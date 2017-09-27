@@ -66,7 +66,7 @@ public class UpdateVersionUtil implements DownLoadApkDialog.CancleDownloadApkLis
                     updateType = mainAdsInfo.getUpdateType();
                     checkVersion();
                 } else {
-                    ToastUtil.showLong(mActivity, mActivity.getResources().getString(R.string.mine_latest_version));
+//                    ToastUtil.showLong(mActivity, mActivity.getResources().getString(R.string.mine_latest_version));
                 }
             }
         } catch (Resources.NotFoundException e) {

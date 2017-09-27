@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.bh.uhome.lib.base.log.LogUtil;
+
 /**
  * @author 凌霄
  * @date 2017/6/29.
@@ -59,5 +61,22 @@ public class CommonUtil {
             e.printStackTrace();
         }
         return versionCodeLocal;
+    }
+
+    /**
+     * 获取本地软件版本号名称
+     */
+    public static String getLocalVersionName(Context ctx) {
+        String localVersion = "";
+        try {
+            PackageInfo packageInfo = ctx.getApplicationContext()
+                    .getPackageManager()
+                    .getPackageInfo(ctx.getPackageName(), 0);
+            localVersion = packageInfo.versionName;
+            LogUtil.d("TAG", "本软件的版本号。。" + localVersion);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return localVersion;
     }
 }

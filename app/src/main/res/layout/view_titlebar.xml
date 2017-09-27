@@ -36,11 +36,12 @@
                         android:id="@+id/title_header_left_iv"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center"
+                        android:background="@mipmap/title_back_arrow"
+                        android:gravity="center_vertical"
                         android:paddingLeft="@dimen/dimens_10dp"
                         android:paddingRight="@dimen/dimens_10dp"
                         android:singleLine="true"
-                         />
+                        android:visibility="gone" />
 
                     <!--有新消息-->
                     <ImageView
