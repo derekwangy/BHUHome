@@ -13,6 +13,16 @@ android {
 
         // Enabling multidex support.
         multiDexEnabled true
+        //萤石云只支持32位设置
+        ndk {
+            abiFilters "armeabi-v7a"//只支持32位
+        }
+    }
+    //萤石云
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
     buildTypes {
         release {
@@ -39,4 +49,6 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.0.0'
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.android.support:multidex:1.0.0'
+
+    compile 'com.hikvision.ezviz:ezuikit:1.2' //【萤石云】
 }

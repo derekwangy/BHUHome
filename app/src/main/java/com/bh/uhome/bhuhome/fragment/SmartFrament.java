@@ -28,6 +28,7 @@ import com.bh.uhome.bhuhome.util.UIUtils;
 import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
 import com.bh.uhome.lib.base.base.BaseFragment;
 import com.bh.uhome.lib.base.toast.ToastUtil;
+import com.ezvizuikit.open.EZUIPlayer;
 
 
 /**
@@ -44,6 +45,7 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     private GalleryGoodsAdapter homeMenuAdapter = null;
     private GalleryChildMenuAdapter childHomeMenuAdapter = null;
     private MallIndexBanner mall_viewpager_banner = null;
+    private EZUIPlayer mPlayer = null;  //视频播放
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         homeMenu = parentView.findViewById(R.id.homeMenu);
         childHomeMenu = parentView.findViewById(R.id.childHomeMenu);
         mall_viewpager_banner = parentView.findViewById(R.id.mall_viewpager_banner);
+        //获取EZUIPlayer实例
+        mPlayer = (EZUIPlayer) parentView.findViewById(R.id.player_ui);
     }
 
     private void initData() {

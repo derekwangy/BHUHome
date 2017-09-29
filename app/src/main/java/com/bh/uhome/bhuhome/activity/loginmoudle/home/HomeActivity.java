@@ -9,11 +9,9 @@ import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.adapter.FragPagerAdapter;
 import com.bh.uhome.bhuhome.db.mockdata.SmartFragmentData;
-import com.bh.uhome.bhuhome.entity.MainAdsInfo;
 import com.bh.uhome.bhuhome.entity.VersionInfo;
 import com.bh.uhome.bhuhome.fragment.MallFragment;
 import com.bh.uhome.bhuhome.fragment.MyFragment;
@@ -22,7 +20,8 @@ import com.bh.uhome.bhuhome.util.CommonUtil;
 import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
 import com.bh.uhome.bhuhome.widget.UnScrollViewPager;
 import com.bh.uhome.lib.base.base.BaseActivity;
-import com.google.gson.annotations.Expose;
+import com.bh.uhome.lib.base.net.http.HttpManager;
+import com.bh.uhome.lib.base.net.listener.HttpOnNextListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +32,13 @@ import java.util.List;
  * @time 14:17.
  * @description Describe
  */
-public class HomeActivity extends BaseActivity implements HomeContract.IHomeView,RadioGroup.OnCheckedChangeListener{
+public class HomeActivity extends BaseActivity implements HomeContract.IHomeView,RadioGroup.OnCheckedChangeListener {
 
     private HomeContract.IHomePresenter mHomePresenter;
 
     private static final String KEY_PAGEINDEX = "key_page_index";
-
     private static final String PAGE_INDEX = "page_index";
     private static final String CURRENT_INDEX = "current_index";
-
 
     /**
      * The View pager.
@@ -62,6 +59,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
      */
     private int pageIndex = 0;
 
+    protected HttpManager manager;
+
     public static void actionStart(BaseActivity activity, int pageIndex) {
         activity.startActivity(new Intent(activity, HomeActivity.class).putExtra(KEY_PAGEINDEX, pageIndex));
     }
@@ -77,14 +76,14 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         setContentView(R.layout.activity_home);
 
         mHomePresenter = new HomePresenter(this);
-        Expose nd;
+         /*初始化数据*/
+//        manager = new HttpManager(this, this);
     }
 
     @Override
     protected void initViews() {
         viewPager = findView(R.id.layout_container);
         radioGroup = findView(R.id.radio_group);
-
 
     }
 
@@ -210,4 +209,5 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         super.onActivityResult(requestCode, resultCode, data);
         fragments.get(viewPager.getCurrentItem()).onActivityResult(requestCode, resultCode, data);
     }
+
 }

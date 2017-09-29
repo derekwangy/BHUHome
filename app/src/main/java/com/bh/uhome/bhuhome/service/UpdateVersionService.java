@@ -73,13 +73,18 @@ public class UpdateVersionService extends Service {
 
 
                     //下载完成,点击可以去安装文件
-//                    Intent intent = new Intent();
-//                    intent.setAction(Intent.ACTION_VIEW);// android.intent.action.VIEW
-//                    intent.setDataAndType(Uri.fromFile(new File(FileUtil.getPath() + apkName)),
-//                            "application/vnd.android.package-archive");
-//                    myNotify.flags = Notification.FLAG_AUTO_CANCEL;
-//                    myNotify.contentIntent = PendingIntent.getActivity(UpdateVersionService.this, 1, intent, 0);
-//                    notificationManager.notify(notificationId, myNotify);
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);// android.intent.action.VIEW
+                    Uri uri=null;
+                    if (Build.VERSION.SDK_INT >= 24) {
+                        uri = FileProvider.getUriForFile(getApplicationContext(), "com.bh.uhome.bhuhome.FileProvider", new File(FileUtil.getPath() + apkName));
+                    } else {
+                        uri = Uri.fromFile(new File(FileUtil.getPath() + apkName));
+                    }
+                    intent.setDataAndType(uri,"application/vnd.android.package-archive");
+                    myNotify.flags = Notification.FLAG_AUTO_CANCEL;
+                    myNotify.contentIntent = PendingIntent.getActivity(UpdateVersionService.this, 1, intent, 0);
+                    notificationManager.notify(notificationId, myNotify);
 
                     installAPK();
 
