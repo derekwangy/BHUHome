@@ -2,21 +2,27 @@ package com.bh.uhome.lib.base.net.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.bh.uhome.lib.base.app.RxRetrofitApp;
 import com.bh.uhome.lib.base.net.db.CookieResulteDao;
 import com.bh.uhome.lib.base.net.db.DaoMaster;
 import com.bh.uhome.lib.base.net.db.DaoSession;
 import com.bh.uhome.lib.base.net.http.cookie.CookieResulte;
+
 import org.greenrobot.greendao.query.QueryBuilder;
+
 import java.util.List;
 
 
 /**
  * 数据缓存
  * 数据库工具类-geendao运用
- * Created by WZG on 2016/10/25.
+ *
+ * @author derek
+ * @date 2017/8/10.
+ * @time 14:10.
+ * @description Describe
  */
-
 public class CookieDbUtil {
     private static CookieDbUtil db;
     private final static String dbName = "tests_db";

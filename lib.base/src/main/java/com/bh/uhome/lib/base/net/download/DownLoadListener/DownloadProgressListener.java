@@ -1,9 +1,13 @@
 package com.bh.uhome.lib.base.net.download.DownLoadListener;
 
 
+
 /**
  * 成功回调处理
- * Created by WZG on 2016/10/20.
+ * @author derek
+ * @date 2017/8/22.
+ * @time 10:15.
+ * @description Describe
  */
 public interface DownloadProgressListener {
     /**

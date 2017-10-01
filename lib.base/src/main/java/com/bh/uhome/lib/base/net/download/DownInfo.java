@@ -2,8 +2,6 @@ package com.bh.uhome.lib.base.net.download;
 
 
 
-
-
 import com.bh.uhome.lib.base.net.listener.HttpDownOnNextListener;
 
 import org.greenrobot.greendao.annotation.Entity;
@@ -11,11 +9,14 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Transient;
 
-/**
- * apk下载请求数据基础类
- * Created by WZG on 2016/10/20.
- */
 
+/**
+ *apk下载请求数据基础类
+ * @author derek
+ * @date 2017/8/22.
+ * @time 10:16.
+ * @description Describe
+ */
 @Entity
 public class DownInfo{
     @Id

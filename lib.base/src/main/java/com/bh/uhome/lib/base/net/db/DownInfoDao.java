@@ -3,6 +3,7 @@ package com.bh.uhome.lib.base.net.db;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 
+
 import com.bh.uhome.lib.base.net.download.DownInfo;
 
 import org.greenrobot.greendao.AbstractDao;

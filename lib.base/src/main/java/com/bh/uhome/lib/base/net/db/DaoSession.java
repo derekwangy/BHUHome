@@ -1,5 +1,6 @@
 package com.bh.uhome.lib.base.net.db;
 
+
 import com.bh.uhome.lib.base.net.download.DownInfo;
 import com.bh.uhome.lib.base.net.http.cookie.CookieResulte;
 

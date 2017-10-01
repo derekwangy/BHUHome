@@ -105,11 +105,11 @@
     <color name="color_5b5b5b">#5b5b5b</color>
     <color name="color_c9c9ce">#c9c9ce</color>
     <color name="color_ef4939">#ef4939</color>
-    <color name="viewfinder_frame">#ff000000</color>
-    <color name="viewfinder_laser">#ffff0000</color>
-    <color name="viewfinder_mask">#60000000</color>
-    <color name="result_view">#b0000000</color>
-    <color name="possible_result_points">#c0ffff00</color>
+    <!--<color name="viewfinder_frame">#ff000000</color>-->
+    <!--<color name="viewfinder_laser">#ffff0000</color>-->
+    <!--<color name="viewfinder_mask">#60000000</color>-->
+    <!--<color name="result_view">#b0000000</color>-->
+    <!--<color name="possible_result_points">#c0ffff00</color>-->
     <color name="color_64a7ea">#64a7ea</color>
     <color name="color_55ffffff">#55ffffff</color>
     <color name="color_26ffffff">#26ffffff</color>
@@ -141,6 +141,7 @@
     <color name="color_757575">#66757575</color>
     <color name="color_282828">#282828</color>
     <color name="color_959595">#959595</color>
-
+    <color name="color_c8c8c8">#c8c8c8</color>
+    <color name="color_e3e3e3">#e3e3e3</color>
 
 </resources>

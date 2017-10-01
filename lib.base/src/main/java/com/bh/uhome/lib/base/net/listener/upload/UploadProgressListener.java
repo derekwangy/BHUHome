@@ -8,6 +8,7 @@ package com.bh.uhome.lib.base.net.listener.upload;
 public interface UploadProgressListener {
     /**
      * 上传进度
+     * 手动回调到主线程中
      * @param currentBytesCount
      * @param totalBytesCount
      */

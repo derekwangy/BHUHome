@@ -12,11 +12,15 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
 /**
  * get缓存方式拦截器
- * Created by WZG on 2016/10/26.
+ *
+ * @author derek
+ * @date 2017/8/10.
+ * @time 15:10.
+ * @description Describe
  */
-
 public class CacheInterceptor implements Interceptor {
 
     @Override

@@ -1,8 +1,13 @@
 package com.bh.uhome.lib.base.net.listener;
 
+
 /**
  * 下载过程中的回调处理
- * Created by WZG on 2016/10/20.
+ *
+ * @author derek
+ * @date 2017/8/14.
+ * @time 11:10.
+ * @description Describe
  */
 public abstract class HttpDownOnNextListener<T> {
     /**

@@ -1,24 +1,21 @@
 package com.bh.uhome.lib.base.net.subscribers;
 
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.widget.Toast;
-
 
 import com.bh.uhome.lib.base.app.RxRetrofitApp;
 import com.bh.uhome.lib.base.net.Api.BaseApi;
+import com.bh.uhome.lib.base.net.exception.ApiException;
+import com.bh.uhome.lib.base.net.exception.CodeException;
 import com.bh.uhome.lib.base.net.exception.HttpTimeException;
 import com.bh.uhome.lib.base.net.http.cookie.CookieResulte;
 import com.bh.uhome.lib.base.net.listener.HttpOnNextListener;
 import com.bh.uhome.lib.base.net.utils.AppUtil;
 import com.bh.uhome.lib.base.net.utils.CookieDbUtil;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-
 
 import java.lang.ref.SoftReference;
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -27,16 +24,20 @@ import rx.Subscriber;
  * 用于在Http请求开始时，自动显示一个ProgressDialog
  * 在Http请求结束是，关闭ProgressDialog
  * 调用者自己对请求数据进行处理
- * Created by WZG on 2016/7/16.
+ *
+ * @author derek
+ * @date 2017/8/14.
+ * @time 11:30.
+ * @description Describe
  */
 public class ProgressSubscriber<T> extends Subscriber<T> {
     /*是否弹框*/
     private boolean showPorgress = true;
-    /* 软引用回调接口*/
+    //    回调接口
     private SoftReference<HttpOnNextListener> mSubscriberOnNextListener;
-    /*软引用反正内存泄露*/
-    private SoftReference<RxAppCompatActivity> mActivity;
-    /*加载框可自己定义*/
+    //    软引用反正内存泄露
+    private SoftReference<Context> mActivity;
+    //    加载框可自己定义
     private ProgressDialog pd;
     /*请求数据*/
     private BaseApi api;
@@ -47,10 +48,11 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      *
      * @param api
      */
-    public ProgressSubscriber(BaseApi api) {
+    public ProgressSubscriber(BaseApi api, SoftReference<HttpOnNextListener> listenerSoftReference, SoftReference<Context>
+            mActivity) {
         this.api = api;
-        this.mSubscriberOnNextListener = api.getListener();
-        this.mActivity = new SoftReference<>(api.getRxAppCompatActivity());
+        this.mSubscriberOnNextListener = listenerSoftReference;
+        this.mActivity = mActivity;
         setShowPorgress(api.isShowProgress());
         if (api.isShowProgress()) {
             initProgressDialog(api.isCancel());
@@ -70,9 +72,6 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
                 pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialogInterface) {
-                        if (mSubscriberOnNextListener.get() != null) {
-                            mSubscriberOnNextListener.get().onCancel();
-                        }
                         onCancelProgress();
                     }
                 });
@@ -120,7 +119,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
                 long time = (System.currentTimeMillis() - cookieResulte.getTime()) / 1000;
                 if (time < api.getCookieNetWorkTime()) {
                     if (mSubscriberOnNextListener.get() != null) {
-                        mSubscriberOnNextListener.get().onCacheNext(cookieResulte.getResulte());
+                        mSubscriberOnNextListener.get().onNext(cookieResulte.getResulte(), api.getMethod());
                     }
                     onCompleted();
                     unsubscribe();
@@ -145,58 +144,71 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      */
     @Override
     public void onError(Throwable e) {
-        dismissProgressDialog();
         /*需要緩存并且本地有缓存才返回*/
         if (api.isCache()) {
-            Observable.just(api.getUrl()).subscribe(new Subscriber<String>() {
-                @Override
-                public void onCompleted() {
-
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    errorDo(e);
-                }
-
-                @Override
-                public void onNext(String s) {
-                    /*获取缓存数据*/
-                    CookieResulte cookieResulte = CookieDbUtil.getInstance().queryCookieBy(s);
-                    if (cookieResulte == null) {
-                        throw new HttpTimeException("网络错误");
-                    }
-                    long time = (System.currentTimeMillis() - cookieResulte.getTime()) / 1000;
-                    if (time < api.getCookieNoNetWorkTime()) {
-                        if (mSubscriberOnNextListener.get() != null) {
-                            mSubscriberOnNextListener.get().onCacheNext(cookieResulte.getResulte());
-                        }
-                    } else {
-                        CookieDbUtil.getInstance().deleteCookie(cookieResulte);
-                        throw new HttpTimeException("网络错误");
-                    }
-                }
-            });
+            getCache();
         } else {
             errorDo(e);
         }
+        dismissProgressDialog();
     }
 
-    /*错误统一处理*/
+    /**
+     * 获取cache数据
+     */
+    private void getCache() {
+        Observable.just(api.getUrl()).subscribe(new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                errorDo(e);
+            }
+
+            @Override
+            public void onNext(String s) {
+                           /*获取缓存数据*/
+                CookieResulte cookieResulte = CookieDbUtil.getInstance().queryCookieBy(s);
+                if (cookieResulte == null) {
+                    throw new HttpTimeException(HttpTimeException.NO_CHACHE_ERROR);
+                }
+                long time = (System.currentTimeMillis() - cookieResulte.getTime()) / 1000;
+                if (time < api.getCookieNoNetWorkTime()) {
+                    if (mSubscriberOnNextListener.get() != null) {
+                        mSubscriberOnNextListener.get().onNext(cookieResulte.getResulte(), api.getMethod());
+                    }
+                } else {
+                    CookieDbUtil.getInstance().deleteCookie(cookieResulte);
+                    throw new HttpTimeException(HttpTimeException.CHACHE_TIMEOUT_ERROR);
+                }
+            }
+        });
+    }
+
+
+    /**
+     * 错误统一处理
+     *
+     * @param e
+     */
     private void errorDo(Throwable e) {
         Context context = mActivity.get();
         if (context == null) return;
-        if (e instanceof SocketTimeoutException) {
-            Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
-        } else if (e instanceof ConnectException) {
-            Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
+        HttpOnNextListener httpOnNextListener = mSubscriberOnNextListener.get();
+        if (httpOnNextListener == null) return;
+        if (e instanceof ApiException) {
+            httpOnNextListener.onError((ApiException) e,api.getMethod());
+        } else if (e instanceof HttpTimeException) {
+            HttpTimeException exception = (HttpTimeException) e;
+            httpOnNextListener.onError(new ApiException(exception, CodeException.RUNTIME_ERROR, exception.getMessage()),api.getMethod());
         } else {
-            Toast.makeText(context, "错误" + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        if (mSubscriberOnNextListener.get() != null) {
-            mSubscriberOnNextListener.get().onError(e);
+            httpOnNextListener.onError(new ApiException(e, CodeException.UNKNOWN_ERROR, e.getMessage()),api.getMethod());
         }
     }
+
 
     /**
      * 将onNext方法中的返回结果交给Activity或Fragment自己处理
@@ -205,10 +217,25 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
      */
     @Override
     public void onNext(T t) {
+         /*缓存处理*/
+        if (api.isCache()) {
+            CookieResulte resulte = CookieDbUtil.getInstance().queryCookieBy(api.getUrl());
+            long time = System.currentTimeMillis();
+            /*保存和更新本地数据*/
+            if (resulte == null) {
+                resulte = new CookieResulte(api.getUrl(), t.toString(), time);
+                CookieDbUtil.getInstance().saveCookie(resulte);
+            } else {
+                resulte.setResulte(t.toString());
+                resulte.setTime(time);
+                CookieDbUtil.getInstance().updateCookie(resulte);
+            }
+        }
         if (mSubscriberOnNextListener.get() != null) {
-            mSubscriberOnNextListener.get().onNext(t);
+            mSubscriberOnNextListener.get().onNext((String) t, api.getMethod());
         }
     }
+
 
     /**
      * 取消ProgressDialog的时候，取消对observable的订阅，同时也取消了http请求
@@ -218,6 +245,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
             this.unsubscribe();
         }
     }
+
 
 
     public boolean isShowPorgress() {

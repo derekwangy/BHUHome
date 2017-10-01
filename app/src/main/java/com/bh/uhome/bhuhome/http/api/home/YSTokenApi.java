@@ -3,6 +3,7 @@ package com.bh.uhome.bhuhome.http.api.home;
 import com.bh.uhome.bhuhome.constant.APPConstant;
 import com.bh.uhome.bhuhome.http.service.IBHService;
 import com.bh.uhome.lib.base.net.Api.BaseApi;
+import com.bh.uhome.lib.base.net.constant.CommURL;
 import com.bh.uhome.lib.base.net.listener.HttpOnNextListener;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -17,9 +18,13 @@ import rx.Observable;
  */
 public class YSTokenApi extends BaseApi {
     public static final String method = "api/lapp/token/get";
-    public YSTokenApi(HttpOnNextListener listener, RxAppCompatActivity rxAppCompatActivity) {
-        super(listener, rxAppCompatActivity);
+
+    public YSTokenApi() {
+        //设置URL
+        setBaseUrl(CommURL.ysUrl);
+        //是否取消加载框
         setCancel(false);
+        //设置方法
         setMethod(method);
     }
 

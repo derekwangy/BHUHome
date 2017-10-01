@@ -1,7 +1,6 @@
 package com.bh.uhome.lib.base.net.download.DownLoadListener;
 
 import java.io.IOException;
-
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import okio.Buffer;
@@ -10,9 +9,13 @@ import okio.ForwardingSource;
 import okio.Okio;
 import okio.Source;
 
+
 /**
- * 自定义精度的body
- * @author wzg
+ *自定义精度的body
+ * @author derek
+ * @date 2017/8/22.
+ * @time 10:15.
+ * @description Describe
  */
 public class DownloadResponseBody extends ResponseBody {
 

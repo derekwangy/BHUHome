@@ -1,57 +1,40 @@
 package com.bh.uhome.lib.base.net.Api;
 
-
-import com.bh.uhome.lib.base.net.exception.HttpTimeException;
-import com.bh.uhome.lib.base.net.listener.HttpOnNextListener;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-
-
-import java.lang.ref.SoftReference;
-
 import retrofit2.Retrofit;
 import rx.Observable;
-import rx.functions.Func1;
 
 /**
  * 请求数据统一封装类
- * Created by WZG on 2016/7/16.
+ * @author derek
+ * @date 2017/8/10.
+ * @time 19:57.
+ * @description Describe
  */
-public abstract class BaseApi<T> implements Func1<BaseResultEntity<T>, T> {
-    //rx生命周期管理
-    private SoftReference<RxAppCompatActivity> rxAppCompatActivity;
-    /*回调*/
-    private SoftReference<HttpOnNextListener> listener;
+public abstract class BaseApi {
     /*是否能取消加载框*/
-    private boolean cancel;
+    private boolean cancel = false;
     /*是否显示加载框*/
-    private boolean showProgress;
+    private boolean showProgress = true;
     /*是否需要缓存处理*/
-    private boolean cache;
+    private boolean cache = false;
     /*基础url*/
-    private String baseUrl = "https://www.izaodao.com/Api/";
+    private String baseUrl = "http://gank.io/api/";
     /*方法-如果需要缓存必须设置这个参数；不需要不用設置*/
-    private String method="";
+    private String method = "";
     /*超时时间-默认6秒*/
     private int connectionTime = 6;
     /*有网情况下的本地缓存时间默认60秒*/
     private int cookieNetWorkTime = 60;
     /*无网络的情况下本地缓存时间默认30天*/
     private int cookieNoNetWorkTime = 24 * 60 * 60 * 30;
-    /* 失败后retry次数*/
+    /* retry次数*/
     private int retryCount = 1;
-    /*失败后retry延迟*/
+    /*retry延迟*/
     private long retryDelay = 100;
-    /*失败后retry叠加延迟*/
-    private long retryIncreaseDelay = 10;
+    /*retry叠加延迟*/
+    private long retryIncreaseDelay = 100;
     /*缓存url-可手动设置*/
     private String cacheUrl;
-
-    public BaseApi(HttpOnNextListener listener, RxAppCompatActivity rxAppCompatActivity) {
-        setListener(listener);
-        setRxAppCompatActivity(rxAppCompatActivity);
-        setShowProgress(true);
-        setCache(true);
-    }
 
     /**
      * 设置参数
@@ -87,15 +70,6 @@ public abstract class BaseApi<T> implements Func1<BaseResultEntity<T>, T> {
         this.connectionTime = connectionTime;
     }
 
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
     public String getBaseUrl() {
         return baseUrl;
     }
@@ -110,10 +84,6 @@ public abstract class BaseApi<T> implements Func1<BaseResultEntity<T>, T> {
             return getBaseUrl() + getMethod();
         }
         return getCacheUrl();
-    }
-
-    public void setRxAppCompatActivity(RxAppCompatActivity rxAppCompatActivity) {
-        this.rxAppCompatActivity = new SoftReference(rxAppCompatActivity);
     }
 
     public boolean isCache() {
@@ -140,14 +110,13 @@ public abstract class BaseApi<T> implements Func1<BaseResultEntity<T>, T> {
         this.cancel = cancel;
     }
 
-    public SoftReference<HttpOnNextListener> getListener() {
-        return listener;
+    public String getMethod() {
+        return method;
     }
 
-    public void setListener(HttpOnNextListener listener) {
-        this.listener = new SoftReference(listener);
+    public void setMethod(String method) {
+        this.method = method;
     }
-
 
     public int getRetryCount() {
         return retryCount;
@@ -172,23 +141,6 @@ public abstract class BaseApi<T> implements Func1<BaseResultEntity<T>, T> {
     public void setRetryIncreaseDelay(long retryIncreaseDelay) {
         this.retryIncreaseDelay = retryIncreaseDelay;
     }
-
-    /*
-         * 获取当前rx生命周期
-         * @return
-         */
-    public RxAppCompatActivity getRxAppCompatActivity() {
-        return rxAppCompatActivity.get();
-    }
-
-    @Override
-    public T call(BaseResultEntity<T> httpResult) {
-        if (httpResult.getRet() == 0) {
-            throw new HttpTimeException(httpResult.getMsg());
-        }
-        return httpResult.getData();
-    }
-
 
     public String getCacheUrl() {
         return cacheUrl;

@@ -1,12 +1,10 @@
 package com.bh.uhome.lib.base.net.download;
 
 
-
 import com.bh.uhome.lib.base.net.download.DownLoadListener.DownloadInterceptor;
 import com.bh.uhome.lib.base.net.exception.HttpTimeException;
 import com.bh.uhome.lib.base.net.exception.RetryWhenNetworkException;
 import com.bh.uhome.lib.base.net.subscribers.ProgressDownSubscriber;
-import com.bh.uhome.lib.base.net.utils.AppUtil;
 import com.bh.uhome.lib.base.net.utils.DbDownUtil;
 
 import java.io.File;
@@ -24,14 +22,20 @@ import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
+import static com.bh.uhome.lib.base.net.utils.AppUtil.getBasUrl;
+
+
 /**
- * http下载处理类
- * Created by WZG on 2016/7/16.
+ *http下载处理类
+ * @author derek
+ * @date 2017/8/22.
+ * @time 10:18.
+ * @description Describe
  */
 public class HttpDownManager {
     /*记录下载数据*/
@@ -92,9 +96,9 @@ public class HttpDownManager {
 
             Retrofit retrofit = new Retrofit.Builder()
                     .client(builder.build())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .baseUrl(AppUtil.getBasUrl(info.getUrl()))
+                    .baseUrl(getBasUrl(info.getUrl()))
                     .build();
             httpService = retrofit.create(HttpDownService.class);
             info.setService(httpService);

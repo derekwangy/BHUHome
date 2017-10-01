@@ -1,6 +1,5 @@
 package com.bh.uhome.lib.base.net.download;
 
-
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -8,9 +7,13 @@ import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 import rx.Observable;
 
+
 /**
- * service统一接口数据
- * Created by WZG on 2016/7/16.
+ * service-下载接口
+ * @author derek
+ * @date 2017/8/22.
+ * @time 10:18.
+ * @description Describe
  */
 public interface HttpDownService {
 

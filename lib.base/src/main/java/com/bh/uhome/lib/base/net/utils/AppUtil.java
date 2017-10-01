@@ -4,11 +4,15 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+
 /**
  * 方法工具类
- * Created by WZG on 2016/10/31.
+ *
+ * @author derek
+ * @date 2017/8/10.
+ * @time 14:10.
+ * @description Describe
  */
-
 public class AppUtil {
     /**
      * 描述：判断网络是否有效.
@@ -36,6 +40,7 @@ public class AppUtil {
 
     /**
      * 读取baseurl
+     *
      * @param url
      * @return
      */
@@ -52,4 +57,5 @@ public class AppUtil {
         }
         return head + url;
     }
+
 }

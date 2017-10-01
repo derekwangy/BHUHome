@@ -6,22 +6,30 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.adapter.FragPagerAdapter;
+import com.bh.uhome.bhuhome.app.AppApplication;
 import com.bh.uhome.bhuhome.db.mockdata.SmartFragmentData;
 import com.bh.uhome.bhuhome.entity.VersionInfo;
+import com.bh.uhome.bhuhome.entity.YSTokenInfo;
 import com.bh.uhome.bhuhome.fragment.MallFragment;
 import com.bh.uhome.bhuhome.fragment.MyFragment;
 import com.bh.uhome.bhuhome.fragment.SmartFrament;
+import com.bh.uhome.bhuhome.http.api.home.YSTokenApi;
 import com.bh.uhome.bhuhome.util.CommonUtil;
 import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
 import com.bh.uhome.bhuhome.widget.UnScrollViewPager;
 import com.bh.uhome.lib.base.base.BaseActivity;
+import com.bh.uhome.lib.base.log.LogUtil;
+import com.bh.uhome.lib.base.net.exception.ApiException;
 import com.bh.uhome.lib.base.net.http.HttpManager;
 import com.bh.uhome.lib.base.net.listener.HttpOnNextListener;
+import com.ezvizuikit.open.EZUIKit;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +40,7 @@ import java.util.List;
  * @time 14:17.
  * @description Describe
  */
-public class HomeActivity extends BaseActivity implements HomeContract.IHomeView,RadioGroup.OnCheckedChangeListener {
+public class HomeActivity extends BaseActivity implements HomeContract.IHomeView,RadioGroup.OnCheckedChangeListener,HttpOnNextListener {
 
     private HomeContract.IHomePresenter mHomePresenter;
 
@@ -59,7 +67,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
      */
     private int pageIndex = 0;
 
-    protected HttpManager manager;
+    protected HttpManager manager; //网络管理类
+    private YSTokenApi ysTokenApi = null;
+    private YSTokenInfo ysTokenInfo = null;
 
     public static void actionStart(BaseActivity activity, int pageIndex) {
         activity.startActivity(new Intent(activity, HomeActivity.class).putExtra(KEY_PAGEINDEX, pageIndex));
@@ -77,7 +87,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
 
         mHomePresenter = new HomePresenter(this);
          /*初始化数据*/
-//        manager = new HttpManager(this, this);
+        manager = new HttpManager(this, HomeActivity.this);
     }
 
     @Override
@@ -102,8 +112,17 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         ((RadioButton) radioGroup.getChildAt(pageIndex)).setChecked(true);
 
 //        checkVersion();
+
+        requestToken();
     }
 
+    /**
+     * 请求萤石token
+     */
+    private void requestToken(){
+        ysTokenApi = new YSTokenApi();
+        manager.doHttpDeal(ysTokenApi);
+    }
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -210,4 +229,26 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         fragments.get(viewPager.getCurrentItem()).onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * 接口请求回调
+     * @param resulte
+     * @param method
+     */
+    @Override
+    public void onNext(String resulte, String method) {
+        if (YSTokenApi.method.equals(method)){
+            LogUtil.i("Data:",resulte);
+            ysTokenInfo = new Gson().fromJson(resulte,YSTokenInfo.class);
+            if (ysTokenApi != null){
+                AppApplication.YS_TOKEN = ysTokenInfo.getData().getAccessToken();
+                //设置授权token
+                EZUIKit.setAccessToken(AppApplication.YS_TOKEN);
+            }
+        }
+    }
+
+    @Override
+    public void onError(ApiException e, String method) {
+        LogUtil.i("Data-err:",e.toString());
+    }
 }

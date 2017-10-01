@@ -206,8 +206,15 @@
             android:id="@+id/player_ui"
             android:layout_width="match_parent"
             android:background="#FF000000"
+            android:visibility="gone"
             android:layout_height="wrap_content"/>
-
+        <SurfaceView
+            android:id="@+id/realplay_sv"
+            android:layout_width="600dp"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="false"
+            android:background="@android:color/transparent" />
     </FrameLayout>
     <View
         android:layout_width="match_parent"

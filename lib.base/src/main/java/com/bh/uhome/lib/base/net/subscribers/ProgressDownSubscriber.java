@@ -1,5 +1,7 @@
 package com.bh.uhome.lib.base.net.subscribers;
 
+
+
 import com.bh.uhome.lib.base.net.download.DownInfo;
 import com.bh.uhome.lib.base.net.download.DownLoadListener.DownloadProgressListener;
 import com.bh.uhome.lib.base.net.download.DownState;
@@ -8,17 +10,22 @@ import com.bh.uhome.lib.base.net.listener.HttpDownOnNextListener;
 import com.bh.uhome.lib.base.net.utils.DbDownUtil;
 
 import java.lang.ref.SoftReference;
+
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-
 import rx.functions.Action1;
 
+
 /**
- * &#x65ad;&#x70b9;&#x4e0b;&#x8f7d;&#x5904;&#x7406;&#x7c7b;Subscriber
- * &#x7528;&#x4e8e;&#x5728;Http&#x8bf7;&#x6c42;&#x5f00;&#x59cb;&#x65f6;&#xff0c;&#x81ea;&#x52a8;&#x663e;&#x793a;&#x4e00;&#x4e2a;ProgressDialog
- * &#x5728;Http&#x8bf7;&#x6c42;&#x7ed3;&#x675f;&#x662f;&#xff0c;&#x5173;&#x95ed;ProgressDialog
- * &#x8c03;&#x7528;&#x8005;&#x81ea;&#x5df1;&#x5bf9;&#x8bf7;&#x6c42;&#x6570;&#x636e;&#x8fdb;&#x884c;&#x5904;&#x7406;
- * Created by WZG on 2016/7/16.
+ * 断点下载处理类Subscriber
+ * 用于在Http请求开始时，自动显示一个ProgressDialog
+ * 在Http请求结束是，关闭ProgressDialog
+ * 调用者自己对请求数据进行处理
+ *
+ * @author derek
+ * @date 2017/8/14.
+ * @time 11:31.
+ * @description Describe
  */
 public class ProgressDownSubscriber<T> extends Subscriber<T> implements DownloadProgressListener {
     //弱引用结果回调

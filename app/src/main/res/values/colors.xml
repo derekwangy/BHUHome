@@ -3,4 +3,44 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--&lt;!&ndash; common &ndash;&gt;-->
+    <!--<color name="mode_bg">#88000000</color>-->
+    <!--<color name="black_bg">#000000</color>-->
+    <!--<color name="shadow">#80000000</color>-->
+    <!--<color name="dark_bg_70p">#bb000000</color>-->
+    <!--<color name="dark_bg_20p">#33000000</color>-->
+    <!--<color name="common_bg">#f0f0f3</color>-->
+    <!--<color name="title_text">#333333</color>-->
+    <!--<color name="title_line">#b2b2b2</color>-->
+    <!--<color name="common_line">#c8c7cc</color>-->
+    <!--<color name="common_text">#333333</color>-->
+    <!--<color name="common_text_sel">#3aa3ee</color>-->
+    <!--<color name="common_sub_text">#888888</color>-->
+    <!--<color name="common_hint_text">#adadad</color>-->
+    <!--<color name="setting_hint_text">#adadad</color>-->
+    <!--<color name="state_normal_text">#71c211</color>-->
+    <!--<color name="state_abnormal_text">#eb0303</color>-->
+    <!--<color name="state_off_text">#adadad</color>-->
+    <!--<color name="bar_text">#676767</color>-->
+    <!--<color name="bar_text_sel">#3aa3ee</color>-->
+    <!--<color name="page_bg_color">#f8f8f8</color>-->
+    <!--<color name="pureblack">#ff000000</color>-->
+    <!--<color name="black">#333333</color>-->
+    <!--<color name="black_text">#333333</color>-->
+    <!--<color name="blue">#205ba9</color>-->
+    <!--<color name="gray">#c8c8c8</color>-->
+    <!--<color name="cameralist_gray">#e3e3e3</color>-->
+    <!--<color name="page_change_gray">#8f8f8f</color>-->
+    <!--<color name="gray_text">#adadad</color>-->
+    <!--<color name="red">#bd2228</color>-->
+    <!--<color name="transparent">#00ffffff</color>-->
+    <!--<color name="translucent_black">#c0000000</color>-->
+    <!--<color name="text_black">#353535</color>-->
+    <!--<color name="white">#ffffff</color>-->
+    <!--<color name="yahei">#626262</color>-->
+    <!--<color name="articletext_backcolor">#f7f7f7</color>-->
+    <!--<color name="trans_bg_color">#c0ffffff</color>-->
+    <!--<color name="gray_bg">#ffe5e7e9</color>-->
+    <!--<color name="unopen">#748dac</color>-->
 </resources>

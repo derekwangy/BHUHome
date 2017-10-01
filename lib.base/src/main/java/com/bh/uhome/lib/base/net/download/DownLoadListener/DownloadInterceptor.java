@@ -5,9 +5,13 @@ import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
+
 /**
  * 成功回调处理
- * Created by WZG on 2016/10/20.
+ * @author derek
+ * @date 2017/8/22.
+ * @time 10:05.
+ * @description Describe
  */
 public class DownloadInterceptor implements Interceptor {
 

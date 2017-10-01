@@ -2,20 +2,25 @@ package com.bh.uhome.bhuhome.fragment;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bh.uhome.bhuhome.R;
+import com.bh.uhome.bhuhome.activity.main.cameralist.EZRealPlayActivity;
 import com.bh.uhome.bhuhome.activity.mine.AboutUsActivity;
 import com.bh.uhome.bhuhome.adapter.GalleryChildMenuAdapter;
 import com.bh.uhome.bhuhome.adapter.GalleryGoodsAdapter;
+import com.bh.uhome.bhuhome.app.AppApplication;
 import com.bh.uhome.bhuhome.banner.MallIndexBanner;
 import com.bh.uhome.bhuhome.db.mockdata.MallFragmentData;
 import com.bh.uhome.bhuhome.db.mockdata.SmartFragmentData;
@@ -23,12 +28,29 @@ import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
 import com.bh.uhome.bhuhome.entity.VersionInfo;
 import com.bh.uhome.bhuhome.recycleviewmanager.FullyLinearLayoutManager;
 import com.bh.uhome.bhuhome.service.UpdateVersionService;
+import com.bh.uhome.bhuhome.util.ActivityUtils;
 import com.bh.uhome.bhuhome.util.CommonUtil;
+import com.bh.uhome.bhuhome.util.EZUtils;
 import com.bh.uhome.bhuhome.util.UIUtils;
 import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
 import com.bh.uhome.lib.base.base.BaseFragment;
 import com.bh.uhome.lib.base.toast.ToastUtil;
+import com.ezvizuikit.open.EZUIError;
+import com.ezvizuikit.open.EZUIKit;
 import com.ezvizuikit.open.EZUIPlayer;
+import com.videogo.constant.IntentConsts;
+import com.videogo.errorlayer.ErrorInfo;
+import com.videogo.exception.BaseException;
+import com.videogo.exception.ErrorCode;
+import com.videogo.openapi.bean.EZCameraInfo;
+import com.videogo.openapi.bean.EZDeviceInfo;
+import com.videogo.util.ConnectionDetector;
+import com.videogo.util.LogUtil;
+import com.videogo.util.Utils;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -38,6 +60,7 @@ import com.ezvizuikit.open.EZUIPlayer;
  * @description Describe
  */
 public class SmartFrament extends BaseFragment implements View.OnClickListener{
+    private static final String TAG = "SmartFrament-Cammar:";
     private TextView title_header_title_tv = null;
     private View parentView = null;
     private ImageView title_header_right1_iv = null;
@@ -46,6 +69,8 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     private GalleryChildMenuAdapter childHomeMenuAdapter = null;
     private MallIndexBanner mall_viewpager_banner = null;
     private EZUIPlayer mPlayer = null;  //视频播放
+    private SurfaceView realplay_sv = null;  //播放
+    private EZCameraInfo cameraInfo = null;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,6 +88,7 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         mall_viewpager_banner = parentView.findViewById(R.id.mall_viewpager_banner);
         //获取EZUIPlayer实例
         mPlayer = (EZUIPlayer) parentView.findViewById(R.id.player_ui);
+        realplay_sv = (SurfaceView)parentView.findViewById(R.id.realplay_sv);
     }
 
     private void initData() {
@@ -76,6 +102,125 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
 
         checkVersion();
 
+//        initplayer();
+        ActivityUtils.goToLoginAgain(getActivity());
+
+        startPlayer();
+    }
+
+    private void startPlayer() {
+        new GetCamersInfoListTask().execute();
+    }
+
+    /**
+     * 获取事件消息任务
+     */
+    class GetCamersInfoListTask extends AsyncTask<Void, Void, List<EZDeviceInfo>> {
+        private int mErrorCode = 0;
+
+        public GetCamersInfoListTask() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //mListView.setFooterRefreshEnabled(true);
+            //加载前处理显示问题
+        }
+
+        @Override
+        protected List<EZDeviceInfo> doInBackground(Void... params) {
+
+            if (!ConnectionDetector.isNetworkAvailable(getActivity())) {
+                mErrorCode = ErrorCode.ERROR_WEB_NET_EXCEPTION;
+                return null;
+            }
+            try {
+                List<EZDeviceInfo> result = null;
+                result = AppApplication.getOpenSDK().getDeviceList(0, 20);
+                return result;
+
+            } catch (BaseException e) {
+                ErrorInfo errorInfo = (ErrorInfo) e.getObject();
+                mErrorCode = errorInfo.errorCode;
+                LogUtil.d(TAG, errorInfo.toString());
+
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(List<EZDeviceInfo> result) {
+            super.onPostExecute(result);
+            if (result != null) {
+                cameraInfo = EZUtils.getCameraInfoFromDevice(result.get(0), 0);
+                Intent toIntent = new Intent(getActivity(), EZRealPlayActivity.class);
+                toIntent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, cameraInfo);
+                toIntent.putExtra(IntentConsts.EXTRA_DEVICE_INFO, result.get(0));
+                startActivity(toIntent);
+            }
+
+            if (mErrorCode != 0) {
+                onError(mErrorCode);
+            }
+        }
+
+        protected void onError(int errorCode) {
+            switch (errorCode) {
+                case ErrorCode.ERROR_WEB_SESSION_ERROR:
+                case ErrorCode.ERROR_WEB_SESSION_EXPIRE:
+                    ActivityUtils.handleSessionException(getActivity());
+                    break;
+                default:
+
+                    break;
+            }
+        }
+    }
+
+    private void initplayer() {
+        //设置播放回调callback
+        mPlayer.setCallBack(new EZUIPlayer.EZUIPlayerCallBack() {
+            @Override
+            public void onPlaySuccess() {
+
+            }
+
+            @Override
+            public void onPlayFail(EZUIError ezuiError) {
+
+            }
+
+            @Override
+            public void onVideoSizeChange(int i, int i1) {
+
+            }
+
+            @Override
+            public void onPrepared() {
+
+            }
+
+            @Override
+            public void onPlayTime(Calendar calendar) {
+
+            }
+
+            @Override
+            public void onPlayFinish() {
+
+            }
+        });
+        //设置授权token
+//        EZUIKit.setAccessToken(AppApplication.YS_TOKEN);
+        AppApplication.getOpenSDK().setAccessToken(AppApplication.YS_TOKEN);
+        //设置播放宽高
+//        mPlayer.setSurfaceSize(int width, int height);
+        String playUrl = "ezopen://open.ys7.com/771907733/1.rec";
+        //设置播放参数
+        mPlayer.setUrl(playUrl);
+        //开始播放
+        mPlayer.startPlay();
     }
 
     private void setHomeAdBannerData() {
@@ -199,5 +344,19 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
                 ToastUtil.showShort(getActivity(),"add");
                 break;
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        //停止播放
+        mPlayer.stopPlay();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //释放资源
+        mPlayer.releasePlayer();
     }
 }
