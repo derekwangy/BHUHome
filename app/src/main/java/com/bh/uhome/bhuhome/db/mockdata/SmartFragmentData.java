@@ -1,15 +1,9 @@
 package com.bh.uhome.bhuhome.db.mockdata;
 
 import android.util.Log;
-
 import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
-import com.bh.uhome.bhuhome.entity.MainAdsInfo;
 import com.bh.uhome.bhuhome.entity.VersionInfo;
-import com.google.gson.JsonArray;
-
-
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 

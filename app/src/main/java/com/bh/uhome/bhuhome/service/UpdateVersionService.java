@@ -19,7 +19,6 @@ import android.support.annotation.Nullable;
 
 import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.util.FileUtil;
-import com.google.gson.annotations.Expose;
 
 import java.io.File;
 import okhttp3.Call;
@@ -145,7 +144,6 @@ public class UpdateVersionService extends Service {
             url = intent.getStringExtra("url");
             init();
         }
-        Expose nd;
         return super.onStartCommand(intent, flags, startId);
     }
 

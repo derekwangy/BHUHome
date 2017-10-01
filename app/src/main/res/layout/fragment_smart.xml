@@ -202,12 +202,6 @@
             android:visibility="gone"
             banner:bb_scale="1.33"/>
 
-        <com.ezvizuikit.open.EZUIPlayer
-            android:id="@+id/player_ui"
-            android:layout_width="match_parent"
-            android:background="#FF000000"
-            android:visibility="gone"
-            android:layout_height="wrap_content"/>
         <SurfaceView
             android:id="@+id/realplay_sv"
             android:layout_width="600dp"

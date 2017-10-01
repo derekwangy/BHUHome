@@ -6,7 +6,6 @@ import android.support.multidex.MultiDex;
 
 import com.bh.uhome.bhuhome.constant.APPConstant;
 import com.bh.uhome.lib.base.app.RxRetrofitApp;
-import com.ezvizuikit.open.EZUIKit;
 import com.videogo.openapi.EZOpenSDK;
 
 /**
@@ -37,7 +36,6 @@ public class AppApplication extends RxRetrofitApp {
         super.onCreate();
         appContext = this.getApplicationContext();
         //初始化EZUIKit
-        EZUIKit.initWithAppKey(this, APPConstant.YS_APP_KEY);
         initSDK();
     }
 

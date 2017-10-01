@@ -28,8 +28,6 @@ import com.bh.uhome.lib.base.log.LogUtil;
 import com.bh.uhome.lib.base.net.exception.ApiException;
 import com.bh.uhome.lib.base.net.http.HttpManager;
 import com.bh.uhome.lib.base.net.listener.HttpOnNextListener;
-import com.ezvizuikit.open.EZUIKit;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +111,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
 
 //        checkVersion();
 
-        requestToken();
+//        requestToken();
     }
 
     /**
@@ -237,13 +235,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     @Override
     public void onNext(String resulte, String method) {
         if (YSTokenApi.method.equals(method)){
-            LogUtil.i("Data:",resulte);
-            ysTokenInfo = new Gson().fromJson(resulte,YSTokenInfo.class);
-            if (ysTokenApi != null){
-                AppApplication.YS_TOKEN = ysTokenInfo.getData().getAccessToken();
-                //设置授权token
-                EZUIKit.setAccessToken(AppApplication.YS_TOKEN);
-            }
+
         }
     }
 

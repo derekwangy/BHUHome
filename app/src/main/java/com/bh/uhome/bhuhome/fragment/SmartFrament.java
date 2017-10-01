@@ -35,9 +35,6 @@ import com.bh.uhome.bhuhome.util.UIUtils;
 import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
 import com.bh.uhome.lib.base.base.BaseFragment;
 import com.bh.uhome.lib.base.toast.ToastUtil;
-import com.ezvizuikit.open.EZUIError;
-import com.ezvizuikit.open.EZUIKit;
-import com.ezvizuikit.open.EZUIPlayer;
 import com.videogo.constant.IntentConsts;
 import com.videogo.errorlayer.ErrorInfo;
 import com.videogo.exception.BaseException;
@@ -46,10 +43,6 @@ import com.videogo.openapi.bean.EZCameraInfo;
 import com.videogo.openapi.bean.EZDeviceInfo;
 import com.videogo.util.ConnectionDetector;
 import com.videogo.util.LogUtil;
-import com.videogo.util.Utils;
-
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
@@ -68,7 +61,6 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     private GalleryGoodsAdapter homeMenuAdapter = null;
     private GalleryChildMenuAdapter childHomeMenuAdapter = null;
     private MallIndexBanner mall_viewpager_banner = null;
-    private EZUIPlayer mPlayer = null;  //视频播放
     private SurfaceView realplay_sv = null;  //播放
     private EZCameraInfo cameraInfo = null;
     @Nullable
@@ -87,7 +79,6 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         childHomeMenu = parentView.findViewById(R.id.childHomeMenu);
         mall_viewpager_banner = parentView.findViewById(R.id.mall_viewpager_banner);
         //获取EZUIPlayer实例
-        mPlayer = (EZUIPlayer) parentView.findViewById(R.id.player_ui);
         realplay_sv = (SurfaceView)parentView.findViewById(R.id.realplay_sv);
     }
 
@@ -102,7 +93,6 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
 
         checkVersion();
 
-//        initplayer();
         ActivityUtils.goToLoginAgain(getActivity());
 
         startPlayer();
@@ -176,51 +166,6 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
                     break;
             }
         }
-    }
-
-    private void initplayer() {
-        //设置播放回调callback
-        mPlayer.setCallBack(new EZUIPlayer.EZUIPlayerCallBack() {
-            @Override
-            public void onPlaySuccess() {
-
-            }
-
-            @Override
-            public void onPlayFail(EZUIError ezuiError) {
-
-            }
-
-            @Override
-            public void onVideoSizeChange(int i, int i1) {
-
-            }
-
-            @Override
-            public void onPrepared() {
-
-            }
-
-            @Override
-            public void onPlayTime(Calendar calendar) {
-
-            }
-
-            @Override
-            public void onPlayFinish() {
-
-            }
-        });
-        //设置授权token
-//        EZUIKit.setAccessToken(AppApplication.YS_TOKEN);
-        AppApplication.getOpenSDK().setAccessToken(AppApplication.YS_TOKEN);
-        //设置播放宽高
-//        mPlayer.setSurfaceSize(int width, int height);
-        String playUrl = "ezopen://open.ys7.com/771907733/1.rec";
-        //设置播放参数
-        mPlayer.setUrl(playUrl);
-        //开始播放
-        mPlayer.startPlay();
     }
 
     private void setHomeAdBannerData() {
@@ -349,14 +294,10 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     @Override
     public void onStop() {
         super.onStop();
-        //停止播放
-        mPlayer.stopPlay();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //释放资源
-        mPlayer.releasePlayer();
     }
 }
