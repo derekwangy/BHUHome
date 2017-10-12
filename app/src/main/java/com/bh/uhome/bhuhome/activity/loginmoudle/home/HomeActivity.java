@@ -20,6 +20,7 @@ import com.bh.uhome.bhuhome.fragment.MallFragment;
 import com.bh.uhome.bhuhome.fragment.MyFragment;
 import com.bh.uhome.bhuhome.fragment.SmartFrament;
 import com.bh.uhome.bhuhome.http.api.home.YSTokenApi;
+import com.bh.uhome.bhuhome.util.ActivityUtils;
 import com.bh.uhome.bhuhome.util.CommonUtil;
 import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
 import com.bh.uhome.bhuhome.widget.UnScrollViewPager;
@@ -28,6 +29,7 @@ import com.bh.uhome.lib.base.log.LogUtil;
 import com.bh.uhome.lib.base.net.exception.ApiException;
 import com.bh.uhome.lib.base.net.http.HttpManager;
 import com.bh.uhome.lib.base.net.listener.HttpOnNextListener;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +113,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
 
 //        checkVersion();
 
-//        requestToken();
+        requestToken();
     }
 
     /**
@@ -235,7 +237,10 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     @Override
     public void onNext(String resulte, String method) {
         if (YSTokenApi.method.equals(method)){
-
+            ysTokenInfo = new Gson().fromJson(resulte,YSTokenInfo.class);
+            AppApplication.YS_TOKEN = ysTokenInfo.getData().getAccessToken();
+            AppApplication.getOpenSDK().setAccessToken(ysTokenInfo.getData().getAccessToken());
+            ActivityUtils.goToLoginAgain(HomeActivity.this);
         }
     }
 
