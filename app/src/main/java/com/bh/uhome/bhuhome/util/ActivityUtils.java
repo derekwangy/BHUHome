@@ -1,12 +1,14 @@
 package com.bh.uhome.bhuhome.util;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 import com.bh.uhome.bhuhome.app.AppApplication;
 import com.videogo.exception.BaseException;
 import com.videogo.openapi.EZGlobalSDK;
 import com.videogo.openapi.EZOpenSDK;
 import com.videogo.openapi.bean.EZAreaInfo;
+import com.videogo.openapi.bean.EZDeviceInfo;
 import com.videogo.util.LogUtil;
 
 import java.util.List;
@@ -33,6 +35,7 @@ public class ActivityUtils {
                 @Override
                 public void run() {
                     try {
+
                         List<EZAreaInfo> areaList = EZGlobalSDK.getInstance().getAreaList();
                         if (areaList != null) {
                             LogUtil.debugLog("application", "list count: " + areaList.size());

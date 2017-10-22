@@ -4,11 +4,14 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,26 +27,36 @@ import com.bh.uhome.bhuhome.app.AppApplication;
 import com.bh.uhome.bhuhome.banner.MallIndexBanner;
 import com.bh.uhome.bhuhome.db.mockdata.MallFragmentData;
 import com.bh.uhome.bhuhome.db.mockdata.SmartFragmentData;
+import com.bh.uhome.bhuhome.dialog.WaitDialog;
 import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
+import com.bh.uhome.bhuhome.entity.RealPlaySquareInfo;
 import com.bh.uhome.bhuhome.entity.VersionInfo;
 import com.bh.uhome.bhuhome.recycleviewmanager.FullyLinearLayoutManager;
 import com.bh.uhome.bhuhome.service.UpdateVersionService;
 import com.bh.uhome.bhuhome.util.ActivityUtils;
 import com.bh.uhome.bhuhome.util.CommonUtil;
+import com.bh.uhome.bhuhome.util.DataManager;
 import com.bh.uhome.bhuhome.util.EZUtils;
 import com.bh.uhome.bhuhome.util.UIUtils;
 import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
+import com.bh.uhome.bhuhome.widget.loading.LoadingTextView;
 import com.bh.uhome.lib.base.base.BaseFragment;
 import com.bh.uhome.lib.base.toast.ToastUtil;
 import com.videogo.constant.IntentConsts;
 import com.videogo.errorlayer.ErrorInfo;
 import com.videogo.exception.BaseException;
 import com.videogo.exception.ErrorCode;
+import com.videogo.openapi.EZConstants;
+import com.videogo.openapi.EZPlayer;
 import com.videogo.openapi.bean.EZCameraInfo;
 import com.videogo.openapi.bean.EZDeviceInfo;
+import com.videogo.realplay.RealPlayStatus;
 import com.videogo.util.ConnectionDetector;
 import com.videogo.util.LogUtil;
+import com.videogo.util.Utils;
+
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -52,7 +65,7 @@ import java.util.List;
  * @time 14:48.
  * @description Describe
  */
-public class SmartFrament extends BaseFragment implements View.OnClickListener{
+public class SmartFrament extends BaseFragment implements View.OnClickListener,SurfaceHolder.Callback{
     private static final String TAG = "SmartFrament-Cammar:";
     private TextView title_header_title_tv = null;
     private View parentView = null;
@@ -61,8 +74,63 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     private GalleryGoodsAdapter homeMenuAdapter = null;
     private GalleryChildMenuAdapter childHomeMenuAdapter = null;
     private MallIndexBanner mall_viewpager_banner = null;
-    private SurfaceView realplay_sv = null;  //播放
+    //视频设置
+    /**
+     * 动画时间
+     */
+    private static final int ANIMATION_DURING_TIME = 500;
+
+    public static final float BIG_SCREEN_RATIO = 1.60f;
+
+    // UI消息
+    public static final int MSG_PLAY_UI_UPDATE = 200;
+
+    public static final int MSG_AUTO_START_PLAY = 202;
+
+    public static final int MSG_CLOSE_PTZ_PROMPT = 203;
+
+    public static final int MSG_HIDE_PTZ_DIRECTION = 204;
+
+    public static final int MSG_HIDE_PAGE_ANIM = 205;
+
+    public static final int MSG_PLAY_UI_REFRESH = 206;
+
+    public static final int MSG_PREVIEW_START_PLAY = 207;
+
+    public static final int MSG_SET_VEDIOMODE_SUCCESS = 105;
+
+    /**
+     * 设置视频质量成功
+     */
+    public static final int MSG_SET_VEDIOMODE_FAIL = 106;
+
+    // 视频广场URL
+    private String mRtspUrl = null;
+    // 视频广场播放信息
+    private RealPlaySquareInfo mRealPlaySquareInfo = null;
+    private SurfaceView mRealPlaySv = null; //播放
+    private SurfaceHolder mRealPlaySh = null;
     private EZCameraInfo cameraInfo = null;
+    private EZConstants.EZVideoLevel mCurrentQulityMode = EZConstants.EZVideoLevel.VIDEO_LEVEL_HD;
+    private EZDeviceInfo mDeviceInfo = null;
+    private EZCameraInfo mCameraInfo = null;
+
+    /**
+     * 演示点预览控制对象
+     */
+    private EZPlayer mEZPlayer = null;
+    /**
+     * 标识是否正在播放
+     */
+    private int mStatus = RealPlayStatus.STATUS_INIT;
+    private boolean mIsOnStop = false;
+    private LoadingTextView mRealPlayPlayLoading;
+    private WaitDialog mWaitDialog = null;
+
+    private Handler mHandler = new Handler(){
+
+    };
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,7 +147,7 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
         childHomeMenu = parentView.findViewById(R.id.childHomeMenu);
         mall_viewpager_banner = parentView.findViewById(R.id.mall_viewpager_banner);
         //获取EZUIPlayer实例
-        realplay_sv = (SurfaceView)parentView.findViewById(R.id.realplay_sv);
+        mRealPlaySv = (SurfaceView)parentView.findViewById(R.id.realplay_sv);
     }
 
     private void initData() {
@@ -101,6 +169,23 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     private void startPlayer() {
         new GetCamersInfoListTask().execute();
     }
+
+    //**************surfaceview*******************//
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+
+    }
+    //**************surfaceview*******************//
 
     /**
      * 获取事件消息任务
@@ -144,7 +229,7 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
             super.onPostExecute(result);
             if (result != null) {
                 cameraInfo = EZUtils.getCameraInfoFromDevice(result.get(0), 0);
-                Intent toIntent = new Intent(getActivity(), EZRealPlayActivity.class);
+                Intent toIntent = new Intent(getActivity(), MainFrament.class);
                 toIntent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, cameraInfo);
                 toIntent.putExtra(IntentConsts.EXTRA_DEVICE_INFO, result.get(0));
                 startActivity(toIntent);
@@ -209,8 +294,7 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
             @Override
             public void onItemClick(HomeMenuInfo itemBean, int position) {
                 ToastUtil.showShort(getActivity(),itemBean.getName());
-                Intent mIntent = new Intent(getActivity(), AboutUsActivity.class);
-                startActivity(mIntent);
+                ActivityUtils.goToLoginAgain(getActivity());
             }
 
         });
@@ -299,5 +383,120 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener{
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    /**
+     * 开始播放
+     */
+    private void startRealPlay() {
+        // 增加手机客户端操作信息记录
+        LogUtil.debugLog(TAG, "startRealPlay");
+
+        if (mStatus == RealPlayStatus.STATUS_START || mStatus == RealPlayStatus.STATUS_PLAY) {
+            return;
+        }
+
+        // 检查网络是否可用
+        if (!ConnectionDetector.isNetworkAvailable(getActivity())) {
+            // 提示没有连接网络
+//            setRealPlayFailUI(getString(R.string.realplay_play_fail_becauseof_network));
+            return;
+        }
+
+        mStatus = RealPlayStatus.STATUS_START;
+//        setRealPlayLoadingUI();
+
+        if (mCameraInfo != null) {
+            if (mEZPlayer == null) {
+                mEZPlayer = AppApplication.getOpenSDK().createPlayer(mCameraInfo.getDeviceSerial(), mCameraInfo.getCameraNo());
+            }
+
+            if (mEZPlayer == null)
+                return;
+            if (mDeviceInfo == null) {
+                return;
+            }
+            if (mDeviceInfo.getIsEncrypt() == 1) {
+                mEZPlayer.setPlayVerifyCode(DataManager.getInstance().getDeviceSerialVerifyCode(mCameraInfo.getDeviceSerial()));
+            }
+
+            mEZPlayer.setHandler(mHandler);
+            mEZPlayer.setSurfaceHold(mRealPlaySh);
+            mEZPlayer.startRealPlay();
+        } else if (mRtspUrl != null) {
+            mEZPlayer = AppApplication.getOpenSDK().createPlayerWithUrl(mRtspUrl);
+            //mStub.setCameraId(mCameraInfo.getCameraId());////****  mj
+            if (mEZPlayer == null)
+                return;
+            mEZPlayer.setHandler(mHandler);
+            mEZPlayer.setSurfaceHold(mRealPlaySh);
+
+            mEZPlayer.startRealPlay();
+        }
+        updateLoadingProgress(0);
+    }
+
+    /**
+     * 码流配置 清晰度 2-高清，1-标清，0-流畅
+     *
+     * @see
+     * @since V2.0
+     */
+    private void setQualityMode(final EZConstants.EZVideoLevel mode) {
+        // 检查网络是否可用
+        if (!ConnectionDetector.isNetworkAvailable(getActivity())) {
+            // 提示没有连接网络
+            Utils.showToast(getActivity(), R.string.realplay_set_fail_network);
+            return;
+        }
+
+        if (mEZPlayer != null) {
+            mWaitDialog.setWaitText(this.getString(R.string.setting_video_level));
+            mWaitDialog.show();
+
+            Thread thr = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        // need to modify by yudan at 08-11
+                        AppApplication.getOpenSDK().setVideoLevel(mCameraInfo.getDeviceSerial(), mCameraInfo.getCameraNo(), mode.getVideoLevel());
+                        mCurrentQulityMode = mode;
+                        Message msg = Message.obtain();
+                        msg.what = MSG_SET_VEDIOMODE_SUCCESS;
+                        mHandler.sendMessage(msg);
+                        LogUtil.i(TAG, "setQualityMode success");
+                    } catch (BaseException e) {
+                        mCurrentQulityMode = EZConstants.EZVideoLevel.VIDEO_LEVEL_FLUNET;
+                        e.printStackTrace();
+                        Message msg = Message.obtain();
+                        msg.what = MSG_SET_VEDIOMODE_FAIL;
+                        mHandler.sendMessage(msg);
+                        LogUtil.i(TAG, "setQualityMode fail");
+                    }
+
+                }
+            }) {
+            };
+            thr.start();
+        }
+    }
+
+    private void updateLoadingProgress(final int progress) {
+        mRealPlayPlayLoading.setTag(Integer.valueOf(progress));
+        mRealPlayPlayLoading.setText(progress + "%");
+        mHandler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                if (mRealPlayPlayLoading != null) {
+                    Integer tag = (Integer) mRealPlayPlayLoading.getTag();
+                    if (tag != null && tag.intValue() == progress) {
+                        Random r = new Random();
+                        mRealPlayPlayLoading.setText((progress + r.nextInt(20)) + "%");
+                    }
+                }
+            }
+
+        }, 500);
     }
 }
