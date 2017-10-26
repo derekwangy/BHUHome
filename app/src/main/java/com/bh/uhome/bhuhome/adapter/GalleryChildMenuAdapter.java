@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bh.uhome.bhuhome.R;
+import com.bh.uhome.bhuhome.entity.DeviceControlInfo;
 import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 凌霄
@@ -22,16 +24,16 @@ import java.util.ArrayList;
  */
 public class GalleryChildMenuAdapter extends RecyclerView.Adapter<GalleryChildMenuHolder>{
     private Activity mContext;
-    private ArrayList<HomeMenuInfo> goodsList = null;
+    private List<DeviceControlInfo.DataBean.DevNamesBean> goodsList = null;
     private int[] arrImage = {R.mipmap.ic_baoyuefuwu,R.mipmap.ic_find_medical,R.mipmap.ic_find_life,R.mipmap.ic_find_sport};
 
     //click事件接口
     public interface OnRecyclerViewItemClickListener {
-        void onItemClick(HomeMenuInfo itemBean, int position);
+        void onItemClick(DeviceControlInfo.DataBean.DevNamesBean itemBean, int position);
     }
     private GalleryChildMenuAdapter.OnRecyclerViewItemClickListener listener = null;
 
-    public GalleryChildMenuAdapter(Activity mContext,ArrayList<HomeMenuInfo> goodsList,GalleryChildMenuAdapter.OnRecyclerViewItemClickListener listener){
+    public GalleryChildMenuAdapter(Activity mContext,List<DeviceControlInfo.DataBean.DevNamesBean> goodsList,GalleryChildMenuAdapter.OnRecyclerViewItemClickListener listener){
         this.mContext = mContext;
         this.goodsList = goodsList;
         this.listener = listener;
@@ -47,15 +49,15 @@ public class GalleryChildMenuAdapter extends RecyclerView.Adapter<GalleryChildMe
     public void onBindViewHolder(GalleryChildMenuHolder holder, int position) {
         holder.bind(goodsList.get(position), listener, position);
         try {
-            HomeMenuInfo  data = goodsList.get(position);
+            DeviceControlInfo.DataBean.DevNamesBean  data = goodsList.get(position);
             if (data != null){
-                if (!TextUtils.isEmpty(data.getName())){
-                    holder.txtGalleryGoodsName.setText(data.getName());
+                if (!TextUtils.isEmpty(data.getLocation())){
+                    holder.txtGalleryGoodsName.setText(data.getLocation());
                 }else{
                     holder.txtGalleryGoodsName.setText("");
                 }
 
-                if (!TextUtils.isEmpty(data.getImgUrl())){
+                if (!TextUtils.isEmpty(data.getType())){
 //                    Glide.with(mContext).load(data.getImgUrl()).into(holder.imageGalleryItem);
                     holder.imageGalleryItem.setImageResource(arrImage[position]);
                 }
@@ -85,7 +87,7 @@ class GalleryChildMenuHolder extends RecyclerView.ViewHolder{
         txtGalleryGoodsName = (TextView) itemView.findViewById(R.id.txtGalleryGoodsName);
 
     }
-    public void bind(final HomeMenuInfo itemBean, final GalleryChildMenuAdapter.OnRecyclerViewItemClickListener listener,final int position) {
+    public void bind(final DeviceControlInfo.DataBean.DevNamesBean itemBean, final GalleryChildMenuAdapter.OnRecyclerViewItemClickListener listener,final int position) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 listener.onItemClick(itemBean,position);

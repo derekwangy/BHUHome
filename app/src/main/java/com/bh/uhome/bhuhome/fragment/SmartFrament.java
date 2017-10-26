@@ -28,6 +28,7 @@ import com.bh.uhome.bhuhome.banner.MallIndexBanner;
 import com.bh.uhome.bhuhome.db.mockdata.MallFragmentData;
 import com.bh.uhome.bhuhome.db.mockdata.SmartFragmentData;
 import com.bh.uhome.bhuhome.dialog.WaitDialog;
+import com.bh.uhome.bhuhome.entity.DeviceControlInfo;
 import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
 import com.bh.uhome.bhuhome.entity.RealPlaySquareInfo;
 import com.bh.uhome.bhuhome.entity.VersionInfo;
@@ -288,12 +289,12 @@ public class SmartFrament extends BaseFragment implements View.OnClickListener,S
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         childHomeMenu.setLayoutManager(linearLayoutManager);
-
-        childHomeMenuAdapter = new GalleryChildMenuAdapter(getActivity(), SmartFragmentData.getChildHomeMenuData(), new GalleryChildMenuAdapter.OnRecyclerViewItemClickListener() {
+        List<DeviceControlInfo.DataBean.DevNamesBean>  devNamesBean = null;
+        childHomeMenuAdapter = new GalleryChildMenuAdapter(getActivity(), devNamesBean, new GalleryChildMenuAdapter.OnRecyclerViewItemClickListener() {
 
             @Override
-            public void onItemClick(HomeMenuInfo itemBean, int position) {
-                ToastUtil.showShort(getActivity(),itemBean.getName());
+            public void onItemClick(DeviceControlInfo.DataBean.DevNamesBean itemBean, int position) {
+                ToastUtil.showShort(getActivity(),itemBean.getLocation());
                 ActivityUtils.goToLoginAgain(getActivity());
             }
 

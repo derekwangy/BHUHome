@@ -63,21 +63,24 @@ import com.bh.uhome.bhuhome.banner.MallIndexBanner;
 import com.bh.uhome.bhuhome.db.mockdata.MallFragmentData;
 import com.bh.uhome.bhuhome.db.mockdata.SmartFragmentData;
 import com.bh.uhome.bhuhome.dialog.WaitDialog;
+import com.bh.uhome.bhuhome.entity.DeviceControlInfo;
 import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
 import com.bh.uhome.bhuhome.entity.RealPlaySquareInfo;
-import com.bh.uhome.bhuhome.entity.VersionInfo;
+import com.bh.uhome.bhuhome.http.api.DeviceInfAPI;
 import com.bh.uhome.bhuhome.recycleviewmanager.FullyLinearLayoutManager;
 import com.bh.uhome.bhuhome.util.ActivityUtils;
 import com.bh.uhome.bhuhome.util.AudioPlayUtil;
-import com.bh.uhome.bhuhome.util.CommonUtil;
 import com.bh.uhome.bhuhome.util.DataManager;
 import com.bh.uhome.bhuhome.util.EZUtils;
-import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
 import com.bh.uhome.bhuhome.util.VerifyCodeInput;
 import com.bh.uhome.bhuhome.widget.ScreenOrientationHelper;
 import com.bh.uhome.bhuhome.widget.loading.LoadingTextView;
 import com.bh.uhome.lib.base.base.BaseFragment;
+import com.bh.uhome.lib.base.net.exception.ApiException;
+import com.bh.uhome.lib.base.net.http.HttpManager;
+import com.bh.uhome.lib.base.net.listener.HttpOnNextListener;
 import com.bh.uhome.lib.base.toast.ToastUtil;
+import com.google.gson.Gson;
 import com.videogo.constant.Config;
 import com.videogo.constant.Constant;
 import com.videogo.constant.IntentConsts;
@@ -126,7 +129,7 @@ import java.util.TimerTask;
  * @data 2015-11-11
  */
 public class MainSmartFrament extends BaseFragment implements OnClickListener, SurfaceHolder.Callback,
-        Handler.Callback, OnTouchListener, VerifyCodeInput.VerifyCodeInputListener {
+        Handler.Callback, OnTouchListener, VerifyCodeInput.VerifyCodeInputListener,HttpOnNextListener {
     private static final String TAG = "RealPlayerActivity";
     private Activity mActivity;
     private TextView title_header_title_tv = null;
@@ -323,6 +326,9 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
      */
     private int mRealFlow = 0;
 
+    protected HttpManager manager; //网络管理类
+    private DeviceInfAPI deviceInfAPI = null;
+    private DeviceControlInfo deviceControlInfo = null;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -331,6 +337,8 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = getActivity();
+         /*初始化数据*/
+        manager = new HttpManager(this, this.getContext());
     }
 
     @Override
@@ -349,18 +357,41 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
         title_header_right1_iv.setVisibility(View.VISIBLE);
 
         setHomeMenuData();
-        setChildHomeMenuData();
+
         setHomeAdBannerData();
         SmartFragmentData.getData();
 
         ActivityUtils.goToLoginAgain(mActivity);
 
         startPlayer();
+        getDeviceInfo();
     }
+
+    private void getDeviceInfo(){
+        String userName = "18994388793";
+        deviceInfAPI = new DeviceInfAPI(userName);
+        manager.doHttpDeal(deviceInfAPI);
+    }
+
+    @Override
+    public void onNext(String resulte, String method) {
+        if (DeviceInfAPI.method.equals(method)){
+            deviceControlInfo = new Gson().fromJson(resulte,DeviceControlInfo.class);
+            setChildHomeMenuData();
+        }
+    }
+
+    @Override
+    public void onError(ApiException e, String method) {
+
+    }
+
 
     private void startPlayer() {
         new GetCamersInfoListTask().execute();
     }
+
+
 
     /**
      * 获取事件消息任务
@@ -475,16 +506,21 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
     }
 
     private void setChildHomeMenuData(){
+        String title = deviceControlInfo.getData().get(1).getHomeName();
+        title_header_title_tv.setText(title);
+
+        List<DeviceControlInfo.DataBean.DevNamesBean>  devNamesBean = deviceControlInfo.getData().get(1).getDevNames();
+
         //设置布局管理器
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(mActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         childHomeMenu.setLayoutManager(linearLayoutManager);
 
-        childHomeMenuAdapter = new GalleryChildMenuAdapter(mActivity, SmartFragmentData.getChildHomeMenuData(), new GalleryChildMenuAdapter.OnRecyclerViewItemClickListener() {
+        childHomeMenuAdapter = new GalleryChildMenuAdapter(mActivity, devNamesBean, new GalleryChildMenuAdapter.OnRecyclerViewItemClickListener() {
 
             @Override
-            public void onItemClick(HomeMenuInfo itemBean, int position) {
-                ToastUtil.showShort(mActivity,itemBean.getName());
+            public void onItemClick(DeviceControlInfo.DataBean.DevNamesBean itemBean, int position) {
+                ToastUtil.showShort(mActivity,itemBean.getLocation());
                 ActivityUtils.goToLoginAgain(mActivity);
             }
 

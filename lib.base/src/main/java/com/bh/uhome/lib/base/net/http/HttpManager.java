@@ -1,5 +1,6 @@
 package com.bh.uhome.lib.base.net.http;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.bh.uhome.lib.base.app.RxRetrofitApp;
@@ -38,14 +39,14 @@ public class HttpManager {
     /*软引用對象*/
     private SoftReference<HttpOnNextListener> onNextListener;
     private SoftReference<HttpOnNextSubListener> onNextSubListener;
-    private SoftReference<BaseActivity> appCompatActivity;
+    private SoftReference<Context> appCompatActivity;
 
-    public HttpManager(HttpOnNextListener onNextListener, BaseActivity appCompatActivity) {
+    public HttpManager(HttpOnNextListener onNextListener, Context appCompatActivity) {
         this.onNextListener = new SoftReference(onNextListener);
         this.appCompatActivity = new SoftReference(appCompatActivity);
     }
 
-    public HttpManager(HttpOnNextSubListener onNextSubListener, BaseActivity appCompatActivity) {
+    public HttpManager(HttpOnNextSubListener onNextSubListener, Context appCompatActivity) {
         this.onNextSubListener = new SoftReference(onNextSubListener);
         this.appCompatActivity = new SoftReference(appCompatActivity);
     }
@@ -104,7 +105,7 @@ public class HttpManager {
                 /*生命周期管理*/
                 //.compose(appCompatActivity.get().bindToLifecycle())
                 //Note:手动设置在activity onDestroy的时候取消订阅
-                .compose(appCompatActivity.get().bindUntilEvent(ActivityEvent.DESTROY))
+//                .compose(appCompatActivity.get().bindUntilEvent(ActivityEvent.DESTROY))
                 /*返回数据统一判断*/
                 .map(new ResulteFunc())
                 /*http请求线程*/

@@ -30,7 +30,7 @@ public interface IBHService {
     @GET(VersionAPI.method)
     Observable<String> getVersion();
 
-    //设备信息
+    //搜索前端可管理设备-第二排列表展示
     @GET(DeviceInfAPI.method)
     Observable<String> getDeviceInfo(@Query("username") String username);
 
