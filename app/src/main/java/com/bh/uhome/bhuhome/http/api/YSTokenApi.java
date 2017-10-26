@@ -1,4 +1,4 @@
-package com.bh.uhome.bhuhome.http.api.home;
+package com.bh.uhome.bhuhome.http.api;
 
 import com.bh.uhome.bhuhome.constant.APPConstant;
 import com.bh.uhome.bhuhome.http.service.IBHService;

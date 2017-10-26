@@ -1,12 +1,8 @@
 package com.bh.uhome.bhuhome.activity.loginmoudle.home;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -16,10 +12,11 @@ import com.bh.uhome.bhuhome.app.AppApplication;
 import com.bh.uhome.bhuhome.db.mockdata.SmartFragmentData;
 import com.bh.uhome.bhuhome.entity.VersionInfo;
 import com.bh.uhome.bhuhome.entity.YSTokenInfo;
+import com.bh.uhome.bhuhome.fragment.MainSmartFrament;
 import com.bh.uhome.bhuhome.fragment.MallFragment;
 import com.bh.uhome.bhuhome.fragment.MyFragment;
-import com.bh.uhome.bhuhome.fragment.SmartFrament;
-import com.bh.uhome.bhuhome.http.api.home.YSTokenApi;
+import com.bh.uhome.bhuhome.http.api.VersionAPI;
+import com.bh.uhome.bhuhome.http.api.YSTokenApi;
 import com.bh.uhome.bhuhome.util.ActivityUtils;
 import com.bh.uhome.bhuhome.util.CommonUtil;
 import com.bh.uhome.bhuhome.util.UpdateVersionUtil;
@@ -70,6 +67,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     protected HttpManager manager; //网络管理类
     private YSTokenApi ysTokenApi = null;
     private YSTokenInfo ysTokenInfo = null;
+    private VersionAPI versionAPI = null;
 
     public static void actionStart(BaseActivity activity, int pageIndex) {
         activity.startActivity(new Intent(activity, HomeActivity.class).putExtra(KEY_PAGEINDEX, pageIndex));
@@ -99,7 +97,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
 
     @Override
     protected void initData() {
-        fragments.add(new SmartFrament());
+//        fragments.add(new SmartFrament());
+        fragments.add(new MainSmartFrament());
 //        fragments.add(new ServiceFrament());
         fragments.add(new MallFragment());
         fragments.add(new MyFragment());
@@ -111,7 +110,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         radioGroup.setOnCheckedChangeListener(this);
         ((RadioButton) radioGroup.getChildAt(pageIndex)).setChecked(true);
 
-//        checkVersion();
+        checkVersion();
 
         requestToken();
     }
@@ -149,17 +148,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
      * 检查版本更新
      */
     public void checkVersion() {
-        VersionInfo info = SmartFragmentData.getVersionData();
-
-        try {
-            int localVersionCode = CommonUtil.getAppVersionCode(this);
-            int dbVersionCode = info.getVersionCode();
-            if (dbVersionCode > localVersionCode) {
-                new UpdateVersionUtil(this, info);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        versionAPI = new VersionAPI();
+        manager.doHttpDeal(versionAPI);
     }
 
 
@@ -241,6 +231,17 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
             AppApplication.YS_TOKEN = ysTokenInfo.getData().getAccessToken();
             AppApplication.getOpenSDK().setAccessToken(ysTokenInfo.getData().getAccessToken());
             ActivityUtils.goToLoginAgain(HomeActivity.this);
+        }if (VersionAPI.method.equals(method)){
+            VersionInfo info = new Gson().fromJson(resulte,VersionInfo.class);;
+            try {
+                int localVersionCode = CommonUtil.getAppVersionCode(this);
+                int dbVersionCode = info.getVersionCode();
+                if (dbVersionCode > localVersionCode) {
+                    new UpdateVersionUtil(this, info);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
