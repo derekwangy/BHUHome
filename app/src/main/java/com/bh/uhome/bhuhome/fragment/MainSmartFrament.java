@@ -374,7 +374,7 @@ public class MainSmartFrament extends BaseFragment implements View.OnClickListen
         setHomeAdBannerData();
         SmartFragmentData.getData();
 
-        ActivityUtils.goToLoginAgain(mActivity);
+//        ActivityUtils.goToLoginAgain(mActivity);
 
         startPlayer();
         getDeviceInfo();

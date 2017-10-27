@@ -230,7 +230,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
             ysTokenInfo = new Gson().fromJson(resulte,YSTokenInfo.class);
             AppApplication.YS_TOKEN = ysTokenInfo.getData().getAccessToken();
             AppApplication.getOpenSDK().setAccessToken(ysTokenInfo.getData().getAccessToken());
-            ActivityUtils.goToLoginAgain(HomeActivity.this);
+//            ActivityUtils.goToLoginAgain(HomeActivity.this);
         }if (VersionAPI.method.equals(method)){
             VersionInfo info = new Gson().fromJson(resulte,VersionInfo.class);;
             try {

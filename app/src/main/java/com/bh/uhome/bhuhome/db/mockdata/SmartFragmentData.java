@@ -20,7 +20,7 @@ public class SmartFragmentData {
         version.setVersionName("1.0.1");
         version.setVersionCode(2);
         version.setUpdateType("0");
-        version.setDownloadUrl("http://139.224.116.55:8080/webside/resources/apk/yijia.apk");
+        version.setDownloadUrl("http://139.224.116.55:8080/webside/resources/yijia.apk");
         return version;
     }
 
