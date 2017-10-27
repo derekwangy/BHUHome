@@ -128,7 +128,7 @@ import java.util.TimerTask;
  * @author xiaxingsuo
  * @data 2015-11-11
  */
-public class MainSmartFrament extends BaseFragment implements OnClickListener, SurfaceHolder.Callback,
+public class MainSmartFrament extends BaseFragment implements View.OnClickListener, SurfaceHolder.Callback,
         Handler.Callback, OnTouchListener, VerifyCodeInput.VerifyCodeInputListener,HttpOnNextListener {
     private static final String TAG = "RealPlayerActivity";
     private Activity mActivity;
@@ -339,17 +339,30 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
         mActivity = getActivity();
          /*初始化数据*/
         manager = new HttpManager(this, this.getContext());
+        LogUtil.i("TAGAA","onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         parentView = inflater.inflate(R.layout.fragment_smart_main, container, false);
-        preInitData();
-        initView();
 
+        preInitData();
+        playInitView();
+
+        initView();
         initData();
+        LogUtil.i("TAGAA","onCreateView");
+
 
         return parentView;
+    }
+
+    private void initView(){
+        title_header_title_tv = parentView.findViewById(R.id.title_header_title_tv);
+        title_header_right1_iv = parentView.findViewById(R.id.title_header_right1_iv);
+        homeMenu = parentView.findViewById(R.id.homeMenu);
+        childHomeMenu = parentView.findViewById(R.id.childHomeMenu);
+        mall_viewpager_banner = parentView.findViewById(R.id.mall_viewpager_banner);
     }
 
     private void initData() {
@@ -367,6 +380,9 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
         getDeviceInfo();
     }
 
+    /**
+     * 设备信息
+     */
     private void getDeviceInfo(){
         String userName = "18994388793";
         deviceInfAPI = new DeviceInfAPI(userName);
@@ -391,6 +407,65 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
         new GetCamersInfoListTask().execute();
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.realplay_play_btn:
+            case R.id.realplay_full_play_btn:
+            case R.id.realplay_play_iv:
+                if (mStatus != RealPlayStatus.STATUS_STOP) {
+                    stopRealPlay();
+                    setRealPlayStopUI();
+                } else {
+                    startRealPlay();
+                }
+                break;
+            case R.id.realplay_previously_btn:
+            case R.id.realplay_previously_btn2:
+            case R.id.realplay_full_previously_btn:
+                onCapturePicBtnClick();
+                break;
+            case R.id.realplay_capture_rl:
+                onCaptureRlClick();
+                break;
+            case R.id.realplay_video_btn:
+//            case R.id.realplay_video_start_btn:
+            case R.id.realplay_video_btn2:
+            case R.id.realplay_video_start_btn2:
+            case R.id.realplay_full_video_btn:
+            case R.id.realplay_full_video_start_btn:
+                onRecordBtnClick();
+                break;
+            case R.id.realplay_talk_btn:
+            case R.id.realplay_talk_btn2:
+            case R.id.realplay_full_talk_btn:
+                startVoiceTalk();
+                break;
+
+            case R.id.realplay_quality_btn:
+                openQualityPopupWindow(mRealPlayQualityBtn);
+                break;
+            case R.id.realplay_ptz_btn:
+            case R.id.realplay_ptz_btn2:
+                openPtzPopupWindow(mRealPlayPlayRl);
+                break;
+            case R.id.realplay_full_ptz_btn:
+                setFullPtzStartUI(true);
+                break;
+            case R.id.realplay_full_ptz_anim_btn:
+                setFullPtzStopUI(true);
+                break;
+            case R.id.realplay_sound_btn:
+            case R.id.realplay_full_sound_btn:
+                onSoundBtnClick();
+                break;
+            case R.id.realplay_full_talk_anim_btn:
+                closeTalkPopupWindow(true, true);
+                break;
+            default:
+                break;
+        }
+    }
 
 
     /**
@@ -437,25 +512,37 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
                 mCameraInfo = EZUtils.getCameraInfoFromDevice(result.get(0), 0);
                 mDeviceInfo = result.get(0);
 //                startRealPlay();
-                Intent toIntent = new Intent(getActivity(), MainFrament.class);
-                toIntent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, mCameraInfo);
-                toIntent.putExtra(IntentConsts.EXTRA_DEVICE_INFO, result.get(0));
-                startActivity(toIntent);
+//                Intent toIntent = new Intent(getActivity(), MainFrament.class);
+//                toIntent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, mCameraInfo);
+//                toIntent.putExtra(IntentConsts.EXTRA_DEVICE_INFO, result.get(0));
+//                startActivity(toIntent);
 
-                if (mCameraInfo != null) {
-                    mCurrentQulityMode = (mCameraInfo.getVideoLevel());
-                }
-                LogUtil.debugLog(TAG, "rtspUrl:" + mRtspUrl);
-
-                getRealPlaySquareInfo();
-
-                if (mDeviceInfo != null && mDeviceInfo.getIsEncrypt() == 1) {
-                    mVerifyCode = DataManager.getInstance().getDeviceSerialVerifyCode(mCameraInfo.getDeviceSerial());
-                }
+//                if (mCameraInfo != null) {
+//                    mCurrentQulityMode = (mCameraInfo.getVideoLevel());
+//                }
+//                LogUtil.debugLog(TAG, "rtspUrl:" + mRtspUrl);
+//
+//                getRealPlaySquareInfo();
+//
+//                if (mDeviceInfo != null && mDeviceInfo.getIsEncrypt() == 1) {
+//                    mVerifyCode = DataManager.getInstance().getDeviceSerialVerifyCode(mCameraInfo.getDeviceSerial());
+//                }
                 // 开始播放
 //                preInitData();
-//                initView();
-                startRealPlay();
+//                playInitView();
+//                startRealPlay();
+//                onStart();
+//                onResume();
+                onPause();
+                onStop();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        onStart();
+                        onResume();
+                    }
+                },3000);
+
             }
 
             if (mErrorCode != 0) {
@@ -531,6 +618,7 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
     @Override
     public void onResume() {
         super.onResume();
+        LogUtil.i("TAGAA","onResume");
         if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             return;
         }
@@ -562,18 +650,39 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
             }
         }
         mIsOnStop = false;
+
+        //TODO 暂时先隐藏
+        mRealPlayControlRl.setVisibility(View.GONE);
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        LogUtil.i("TAGAA","onStart");
+    }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        LogUtil.i("TAGAA","onActivityCreated");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        LogUtil.i("TAGAA","onDestroyView");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtil.i("TAGAA","onPause");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
+        LogUtil.i("TAGAA","onStop");
         if (mScreenOrientationHelper != null) {
             mScreenOrientationHelper.postOnStop();
         }
@@ -606,7 +715,7 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        LogUtil.i("TAGAA","onDestroy");
         if (mEZPlayer != null) {
             mEZPlayer.release();
 
@@ -797,15 +906,11 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
     }
 
     // 初始化界面
-    private void initView() {
+    private void playInitView() {
         // 保持屏幕常亮
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        title_header_title_tv = parentView.findViewById(R.id.title_header_title_tv);
-        title_header_right1_iv = parentView.findViewById(R.id.title_header_right1_iv);
-        homeMenu = parentView.findViewById(R.id.homeMenu);
-        childHomeMenu = parentView.findViewById(R.id.childHomeMenu);
-        mall_viewpager_banner = parentView.findViewById(R.id.mall_viewpager_banner);
+
 
         initTitleBar();
         initRealPlayPageLy();
@@ -900,7 +1005,8 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
                 }
             }
         };
-        mRealPlaySv.setOnTouchListener(mRealPlayTouchListener);
+        //TODO 暂时隐藏
+//        mRealPlaySv.setOnTouchListener(mRealPlayTouchListener);
 
         mRealPlayPtzDirectionIv = (ImageView) parentView.findViewById(R.id.realplay_ptz_direction_iv);
 
@@ -1420,7 +1526,7 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
      * (non-Javadoc)
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
-    @Override
+   /* @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.realplay_play_btn:
@@ -1478,7 +1584,7 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
             default:
                 break;
         }
-    }
+    }*/
 
     private void setFullPtzStartUI(boolean startAnim) {
         mIsOnPtz = true;
@@ -3234,9 +3340,9 @@ public class MainSmartFrament extends BaseFragment implements OnClickListener, S
      * @see
      * @since V1.8
      */
-    private void showType() {
+    private void showType() {//TODO 暂时隐藏
         if (Config.LOGGING && mEZPlayer != null) {
-            Utils.showLog(getActivity(), "getType " + ",取流耗时：" + (mStopTime - mStartTime));
+//            Utils.showLog(getActivity(), "getType " + ",取流耗时：" + (mStopTime - mStartTime));
         }
     }
 

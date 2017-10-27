@@ -10,6 +10,7 @@
     <com.videogo.widget.TitleBar
         android:id="@+id/title_bar_portrait"
         android:layout_width="match_parent"
+		android:visibility="gone"
         android:layout_height="wrap_content" />
 
     <RelativeLayout
@@ -35,6 +36,7 @@
  -->
  		<include layout="@layout/ez_play_control"
 			android:layout_alignParentBottom="true"
+
 			android:layout_toRightOf="@+id/realplay_capture_rl"
 			android:layout_toEndOf="@+id/realplay_capture_rl" />
 		<include layout="@layout/ez_realplay_prompt_layout" />
