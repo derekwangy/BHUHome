@@ -10,6 +10,7 @@ import com.bh.uhome.lib.base.net.exception.RetryWhenNetworkException;
 import com.bh.uhome.lib.base.net.http.func.ExceptionFunc;
 import com.bh.uhome.lib.base.net.http.func.ResulteFunc;
 import com.bh.uhome.lib.base.net.http.param.ParamsInterceptor;
+import com.bh.uhome.lib.base.net.http.response.ResponseIntercepter;
 import com.bh.uhome.lib.base.net.listener.HttpOnNextListener;
 import com.bh.uhome.lib.base.net.listener.HttpOnNextSubListener;
 import com.bh.uhome.lib.base.net.subscribers.ProgressSubscriber;
@@ -22,6 +23,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -79,12 +81,14 @@ public class HttpManager {
         }
         //头部参数
         builder.addInterceptor(new ParamsInterceptor());
+        builder.addInterceptor(new ResponseIntercepter());
 
         /*创建retrofit对象*/
         final Retrofit retrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(baseUrl)
                 .build();
         return retrofit;

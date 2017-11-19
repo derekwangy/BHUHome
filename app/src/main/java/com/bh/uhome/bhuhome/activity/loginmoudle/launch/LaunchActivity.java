@@ -1,13 +1,18 @@
 package com.bh.uhome.bhuhome.activity.loginmoudle.launch;
 
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.activity.loginmoudle.guide.GuideActivity;
 import com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity;
+import com.bh.uhome.bhuhome.activity.loginmoudle.login.FastEnterActivity;
+import com.bh.uhome.bhuhome.activity.loginmoudle.login.LoginNewActivity;
 import com.bh.uhome.bhuhome.constant.APPConstant;
+import com.bh.uhome.lib.base.app.RxRetrofitApp;
 import com.bh.uhome.lib.base.base.BaseActivity;
+import com.bh.uhome.lib.base.net.db.ShareToken;
 
 
 /**
@@ -109,7 +114,12 @@ public class LaunchActivity extends BaseActivity implements LaunchContract.ILaun
             GuideActivity.actionStart(this);
         }else{
             // 无需登录
-            HomeActivity.actionStart(this,0);
+            if (!TextUtils.isEmpty(ShareToken.getInstance(LaunchActivity.this).getToken())){
+                RxRetrofitApp.setToken(ShareToken.getInstance(LaunchActivity.this).getToken());
+                HomeActivity.actionStart(this,0);
+            }else {
+                LoginNewActivity.actionStart(this,"");
+            }
         }
         finish();
     }

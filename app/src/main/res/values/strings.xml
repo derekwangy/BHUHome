@@ -143,4 +143,29 @@
     <string name="already_saved_to_volume">已保存至相册</string>
     <string name="source_detection_off">OFF</string>
     <string name="source_detection_on">ON</string>
+
+    <!--登录-->
+    <string name="string_finish">完成</string>
+    <string name="string_phone_number">手机号</string>
+    <string name="string_input_phone_number">请输入手机号</string>
+    <string name="label_if_use_then_agree">使用即表示您同意</string>
+    <string name="label_app_protocol">《BH用户协议》</string>
+    <string name="hint_input_phone_number">请输入手机号码</string>
+
+    <!--密码登录页面-->
+    <string name="string_password_remind">请输入6-16位的密码</string>
+    <string name="string_right_number_remind">请输入正确的手机号</string>
+    <!--验证吗-->
+    <string name="string_code_remind">验证码短信可能略有延迟,确定返回并重新开始?</string>
+    <string name="string_login_fail">登录失败</string>
+    <string name="string_send_voice">语音验证码已发送，请注意接听来电</string>
+    <string name="string_send_voice_ok">已成功发送语音验证码，请保持电话通畅并注意接听来电</string>
+    <string name="string_send_code">验证码已发送</string>
+    <string name="string_retry">重新获取</string>
+    <string name="string_retry_count_down">重新获取(%d)</string>
+    <string name="string_comment_hint">我来说几句</string>
+    <string name="common_pass_reg">[^0-9a-zA-Z]</string>
+    <string name="service_exception">网络开小差去了，请您稍后重试！</string>
+    <string name="string_confirm_submit">确认</string>
+    <string name="cancel">取消</string>
 </resources>

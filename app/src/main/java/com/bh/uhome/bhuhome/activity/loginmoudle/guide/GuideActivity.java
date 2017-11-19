@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity;
+import com.bh.uhome.bhuhome.activity.loginmoudle.login.LoginNewActivity;
 import com.bh.uhome.bhuhome.adapter.GuideAdapter;
 import com.bh.uhome.lib.base.base.BaseActivity;
 
@@ -95,7 +96,7 @@ public class GuideActivity extends BaseActivity implements GuideContract.IGuideV
 //                }else {
 //                    LoginActivity.actionStart(GuideActivity.this);
 //                }
-                HomeActivity.actionStart(GuideActivity.this,0);
+                LoginNewActivity.actionStart(GuideActivity.this,"");
                 finish();
             }
         });

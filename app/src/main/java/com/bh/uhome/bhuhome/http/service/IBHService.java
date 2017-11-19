@@ -1,11 +1,20 @@
 package com.bh.uhome.bhuhome.http.service;
 
+import com.bh.uhome.bhuhome.activity.loginmoudle.login.RegisterActivity;
 import com.bh.uhome.bhuhome.http.api.CameraDeviceInfAPI;
 import com.bh.uhome.bhuhome.http.api.DeviceInfAPI;
 import com.bh.uhome.bhuhome.http.api.HeartBeatAPI;
+import com.bh.uhome.bhuhome.http.api.LoginApi;
+import com.bh.uhome.bhuhome.http.api.LoginCodeApi;
+import com.bh.uhome.bhuhome.http.api.RegisterAPI;
+import com.bh.uhome.bhuhome.http.api.VerificationCodeAPI;
 import com.bh.uhome.bhuhome.http.api.VersionAPI;
 import com.bh.uhome.bhuhome.http.api.YSTokenApi;
+import com.bh.uhome.bhuhome.http.api.body.LoginCodeRequestBody;
+import com.bh.uhome.bhuhome.http.api.body.LoginRequestBody;
+import com.bh.uhome.bhuhome.http.api.body.RegisterBody;
 
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -41,4 +50,21 @@ public interface IBHService {
     //心跳包
     @GET(HeartBeatAPI.method)
     Observable<String> getHeartBeat(@Query("username") String username);
+
+    //普通登录
+    @POST(LoginApi.METHOD)
+    Observable<String> getLogin(@Body LoginRequestBody requestBody);
+
+    //验证码登录
+    @POST(LoginCodeApi.METHOD)
+    Observable<String> getCodeLogin(@Body LoginCodeRequestBody requestBody);
+
+    //获取验证码
+    @GET(VerificationCodeAPI.METHOD)
+    Observable<String> getVerificationCode(@Query("username") String username);
+
+    @POST(RegisterAPI.METHOD)
+    Observable<String> getRegister(@Body RegisterBody requestBody);
+
+
 }

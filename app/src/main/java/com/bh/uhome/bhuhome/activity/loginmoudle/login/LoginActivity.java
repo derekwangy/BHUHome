@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.widget.PhoneTextWatcher;
 import com.bh.uhome.lib.base.base.BaseActivity;
+
+import static com.bh.uhome.bhuhome.activity.loginmoudle.login.FastEnterActivity.PARAM_PHONE;
 
 
 /**
@@ -24,9 +27,16 @@ public class LoginActivity extends BaseActivity implements LoginContract.ILoginV
     private Button buttonLogin;
     private String phoneNumber;
 
-
-    public static void actionStart(Activity activity){
-        activity.startActivity(new Intent(activity,LoginActivity.class));
+    public static void actionStart(Activity activity, String phone) {
+        Intent intent = new Intent(activity,LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if (!TextUtils.isEmpty(phone)) {
+            Bundle bundle = new Bundle();
+            bundle.putString(PARAM_PHONE, phone);
+            intent.putExtras(bundle);
+        }
+        activity.startActivity(intent);
     }
 
 

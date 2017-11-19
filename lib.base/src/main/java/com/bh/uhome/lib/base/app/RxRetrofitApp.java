@@ -2,6 +2,8 @@ package com.bh.uhome.lib.base.app;
 
 import android.app.Application;
 
+import com.bh.uhome.lib.base.net.db.ShareToken;
+
 /**
  * 全局app
  * Created by WZG on 2016/12/12.
@@ -10,6 +12,7 @@ import android.app.Application;
 public class RxRetrofitApp extends Application{
     private static Application application;
     private static boolean debug;
+    public static String token = "";
 
     @Override
     public void onCreate() {
@@ -41,5 +44,10 @@ public class RxRetrofitApp extends Application{
 
     public static void setDebug(boolean debug) {
         RxRetrofitApp.debug = debug;
+    }
+
+    public static void setToken(String token) {
+        RxRetrofitApp.token = token;
+        ShareToken.getInstance(getApplication().getApplicationContext()).saveToken(token);
     }
 }

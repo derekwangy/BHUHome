@@ -40,9 +40,9 @@ public class ParamsInterceptor implements Interceptor {
                 .url(request.url())
                 .headers(request.headers())
                 .addHeader("token", token)
-                .addHeader("deviceID", deviceID)
+//                .addHeader("deviceID", deviceID)
                 .addHeader("isEncrypt", isEncrypt)
-                .addHeader("User-Agent", userAgent)
+//                .addHeader("User-Agent", userAgent)
                 .addHeader("Content-Type", contentType)
                 .addHeader("isBH", isBH)
 

@@ -19,11 +19,23 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.RegisterActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.FastRetrievePasswordActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.FastCodeCheckActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.FastEnterActivity"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity android:name="com.bh.uhome.bhuhome.fragment.MainFrament"
             android:screenOrientation="portrait"></activity>
         <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.guide.GuideActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.LoginActivity"
+        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.LoginNewActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity"
             android:screenOrientation="portrait"

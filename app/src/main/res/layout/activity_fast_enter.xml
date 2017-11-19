@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_ffffff">
+
+    <ImageView
+        android:layout_width="112dp"
+        android:layout_height="@dimen/dimen_forty_eight"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_forty_five"
+        android:src="@mipmap/ic_login_logo" />
+
+    <com.bh.uhome.bhuhome.widget.DeleteEditText
+        android:id="@+id/edit_text_phone"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_height="@dimen/dimen_forty"
+        android:layout_marginTop="@dimen/dimen_one_hundred_fifteen"
+        android:layout_gravity="center_horizontal"
+        android:background="@null"
+        android:gravity="center"
+        android:hint="@string/hint_input_phone_number"
+        android:inputType="number"
+        android:maxLength="13"
+        tools:text="13456961183"
+        android:textColor="@color/color_1a1a1a"
+        android:textColorHint="@color/color_a7a7a7"
+        android:textCursorDrawable="@drawable/edit_text_cursor_color"
+        android:textSize="@dimen/font_eighteen" />
+
+    <View
+        style="@style/gray_line"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_marginTop="155dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/color_3b93eb" />
+
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_height="@dimen/dimen_forty_eight"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="187dp"
+        android:background="@drawable/button_bg_selector_3b93eb"
+        android:enabled="false"
+        android:text="一键登录"
+        android:textColor="@color/button_text_color_selector"
+        android:textSize="@dimen/dimen_eighteen" />
+
+    <TextView
+        android:id="@+id/text_view_password"
+        android:layout_width="@dimen/dimen_one_hundred"
+        android:layout_height="@dimen/dimen_forty"
+        android:layout_gravity="center_horizontal|bottom"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/dimen_thirty"
+        android:text="用密码登录"
+        android:textColor="@color/color_3b93eb"
+        android:textSize="@dimen/font_fourteen" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="249dp"
+        android:text="用户免注册，一键登录BH"
+        android:textColor="@color/color_a7a7a7"
+        android:textSize="@dimen/font_fourteen" />
+
+</FrameLayout>

@@ -35,6 +35,7 @@ public class AppApplication extends RxRetrofitApp {
     public void onCreate() {
         super.onCreate();
         appContext = this.getApplicationContext();
+        RxRetrofitApp.init(this);
         //初始化EZUIKit
         initSDK();
     }

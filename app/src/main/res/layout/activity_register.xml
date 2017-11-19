@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/txt_head_title"
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
+
+        <ImageView
+            android:id="@+id/image_view_back"
+            android:layout_width="60dp"
+            android:layout_height="46dp"
+            android:scaleType="center"
+            android:src="@mipmap/title_back_arrow" />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="注册"
+            android:textColor="@color/color_1a1a1a"
+            android:textSize="@dimen/font_eighteen" />
+    </RelativeLayout>
+    <View
+        android:id="@+id/tool_bar_gray_line"
+        style="@style/gray_line"
+        />
+
+
+    <com.bh.uhome.bhuhome.widget.DeleteEditText
+        android:id="@+id/edit_text_phone"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_height="@dimen/dimen_forty"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_one_hundred_fifteen"
+        android:background="@null"
+        android:gravity="center"
+        android:hint="@string/hint_input_phone_number"
+        android:inputType="number"
+        android:maxLength="13"
+        android:textColor="@color/color_1a1a1a"
+        android:textColorHint="@color/color_a7a7a7"
+        android:textCursorDrawable="@drawable/edit_text_cursor_color"
+        android:textSize="@dimen/font_eighteen"/>
+    <View
+        style="@style/gray_line"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_marginTop="0.5dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/color_3b93eb"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimens_20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <com.bh.uhome.bhuhome.widget.DeleteEditText
+            android:id="@+id/edit_check_code"
+            android:layout_width="140dp"
+            android:layout_height="@dimen/dimen_forty"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:maxLength="13"
+            android:textColor="@color/color_1a1a1a"
+            android:textColorHint="@color/color_a7a7a7"
+            android:textCursorDrawable="@drawable/edit_text_cursor_color"
+            android:textSize="@dimen/font_eighteen"/>
+
+
+        <Button
+            android:id="@+id/btnCode"
+            android:layout_width="@dimen/dimens_100dp"
+            android:layout_height="@dimen/dimens_40dp"
+            android:layout_marginLeft="@dimen/dimens_20dp"
+            android:text="获取验证码"/>
+    </LinearLayout>
+    <View
+        style="@style/gray_line"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_marginTop="0.5dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/color_3b93eb"/>
+
+    <com.bh.uhome.bhuhome.widget.DeleteEditText
+        android:id="@+id/edit_password"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_height="@dimen/dimen_forty"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimens_20dp"
+        android:background="@null"
+        android:gravity="center"
+        android:inputType="textPassword"
+        android:hint="请输入密码"
+        android:maxLength="13"
+        android:textColor="@color/color_1a1a1a"
+        android:textColorHint="@color/color_a7a7a7"
+        android:textCursorDrawable="@drawable/edit_text_cursor_color"
+        android:textSize="@dimen/font_eighteen"/>
+    <View
+        style="@style/gray_line"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_marginTop="0.5dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/color_3b93eb"/>
+    <com.bh.uhome.bhuhome.widget.DeleteEditText
+        android:id="@+id/edit_password_second"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_height="@dimen/dimen_forty"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimens_20dp"
+        android:background="@null"
+        android:gravity="center"
+        android:inputType="textPassword"
+        android:hint="请再次输入密码"
+        android:maxLength="13"
+        android:textColor="@color/color_1a1a1a"
+        android:textColorHint="@color/color_a7a7a7"
+        android:textCursorDrawable="@drawable/edit_text_cursor_color"
+        android:textSize="@dimen/font_eighteen"/>
+    <View
+        style="@style/gray_line"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_marginTop="0.5dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/color_3b93eb"/>
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="@dimen/dimen_two_hundred_sixty"
+        android:layout_height="@dimen/dimen_forty_eight"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimens_40dp"
+        android:background="@drawable/button_bg_selector_3b93eb"
+        android:enabled="false"
+        android:text="提交注册"
+        android:textColor="@color/button_text_color_selector"
+        android:textSize="@dimen/dimen_eighteen"/>
+
+</LinearLayout>
