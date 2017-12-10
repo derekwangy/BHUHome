@@ -84,34 +84,17 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void logoutDialog(){
-//        new AlertDialog.Builder(SettingActivity.this,R.style.AlertDialogCustom).setTitle(getResources().getString(R.string.string_logout))
-//                .setMessage(getString(R.string.string_are_you_sure_you_want_to_logout))
-//                .setNegativeButton(getResources().getString(R.string.string_cancel), null)
-//                .setPositiveButton(getResources().getString(R.string.string_confirm), new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//                requestLoginout();
-//            }
-//        }).show();
-
-        new AlertDialog.Builder(this,R.style.AlertDialogCustom)
-                .setTitle(getResources().getString(R.string.string_logout))
+        new AlertDialog.Builder(SettingActivity.this,R.style.AlertDialogCustom).setTitle(getResources().getString(R.string.string_logout))
                 .setMessage(getString(R.string.string_are_you_sure_you_want_to_logout))
-                .setNegativeButton(getResources().getString(R.string.string_cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
+                .setNegativeButton(getResources().getString(R.string.string_cancel), null)
                 .setPositiveButton(getResources().getString(R.string.string_confirm), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        requestLoginout();
-                        dialog.dismiss();
-                    }
-                })
-                .create().show();
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                requestLoginout();
+            }
+        }).show();
+
     }
 
     private void requestLoginout() {

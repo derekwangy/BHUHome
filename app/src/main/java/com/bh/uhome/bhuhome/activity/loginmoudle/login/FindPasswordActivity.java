@@ -171,9 +171,6 @@ public class FindPasswordActivity extends BaseActivity implements HttpOnNextList
         if (RegisterAPI.METHOD.equals(method)){
             StandarDataInfo info = ParseDataUtil.paseJsonData(resulte,StandarDataInfo.class,FindPasswordActivity.this);
             if (info != null && 1 == info.getCode()){
-                if (!TextUtils.isEmpty(RxRetrofitApp.token)){
-                    HomeActivity.actionStart(this,0);
-                }
                 finish();
             }
         }

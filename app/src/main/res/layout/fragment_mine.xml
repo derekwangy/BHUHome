@@ -48,6 +48,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_50dp"
+            android:visibility="gone"
             android:background="@color/color_ffffff">
 
             <!-- item_icon -->
@@ -81,6 +82,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_10dp"
+            android:visibility="gone"
             android:background="@color/color_f5f5f5"/>
         <!--设备管理-->
         <RelativeLayout

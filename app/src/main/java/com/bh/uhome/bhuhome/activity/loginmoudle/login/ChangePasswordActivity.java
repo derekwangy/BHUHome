@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity;
 import com.bh.uhome.bhuhome.constant.APPConstant;
+import com.bh.uhome.bhuhome.db.sharedprefer.ShareCache;
 import com.bh.uhome.bhuhome.entity.StandarDataInfo;
 import com.bh.uhome.bhuhome.http.api.ChangePwdAPI;
 import com.bh.uhome.bhuhome.http.api.RegisterAPI;
@@ -23,6 +24,7 @@ import com.bh.uhome.bhuhome.widget.DeleteEditText;
 import com.bh.uhome.bhuhome.widget.PhoneTextWatcher;
 import com.bh.uhome.lib.base.app.RxRetrofitApp;
 import com.bh.uhome.lib.base.base.BaseActivity;
+import com.bh.uhome.lib.base.net.db.ShareToken;
 import com.bh.uhome.lib.base.net.exception.ApiException;
 import com.bh.uhome.lib.base.net.http.HttpManager;
 import com.bh.uhome.lib.base.net.listener.HttpOnNextListener;
@@ -87,6 +89,7 @@ public class ChangePasswordActivity extends BaseActivity implements HttpOnNextLi
     @Override
     protected void initData() {
         txtMidTitle.setText("修改密码");
+
         edit_text_phone.addTextChangedListener(new PhoneTextWatcher(edit_text_phone) {
 
             @Override
@@ -170,9 +173,12 @@ public class ChangePasswordActivity extends BaseActivity implements HttpOnNextLi
 
     @Override
     public void onNext(String resulte, String method) {
-        if (RegisterAPI.METHOD.equals(method)){
+        if (ChangePwdAPI.METHOD.equals(method)){
             StandarDataInfo info = ParseDataUtil.paseJsonData(resulte,StandarDataInfo.class,ChangePasswordActivity.this);
             if (info != null && 1 == info.getCode()){
+                ToastUtil.showLong(ChangePasswordActivity.this,"修改密码成功，请重新登录！");
+                ShareToken.getInstance(this).saveToken("");
+                LoginNewActivity.actionStart(this, ShareCache.getInstance(this).getUserName());
                 finish();
             }
         }
