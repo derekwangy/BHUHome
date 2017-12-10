@@ -205,7 +205,7 @@
             android:background="@color/color_f5f5f5"/>
         <!--关于我们-->
         <RelativeLayout
-            android:id="@+id/rLay_about_us"
+            android:id="@+id/rLay_setting"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_50dp"
@@ -237,7 +237,7 @@
                 android:paddingRight="@dimen/d15"
                 android:textColor="@color/color_1a1a1a"
                 android:textSize="@dimen/d16"
-                android:text="@string/about_us" />
+                android:text="@string/string_settings" />
         </RelativeLayout>
 
     </LinearLayout>

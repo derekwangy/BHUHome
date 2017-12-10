@@ -18,11 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.RegisterActivity"
             android:screenOrientation="portrait"
             ></activity>
-        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.FastRetrievePasswordActivity"
+        <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.FindPasswordActivity"
             android:screenOrientation="portrait"
             ></activity>
         <activity android:name="com.bh.uhome.bhuhome.activity.loginmoudle.login.FastCodeCheckActivity"
@@ -42,6 +44,9 @@
             ></activity>
         <activity android:name=".activity.mine.AboutUsActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.mine.SettingActivity"
+            android:screenOrientation="portrait"></activity>
+
         <!--萤石云组件-->
         <activity
             android:name="com.videogo.main.EzvizWebViewActivity"

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:background="@color/color_f5f5f5"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/head_title_layout"/>
+    <!--找回密码-->
+    <RelativeLayout
+        android:id="@+id/rLay_find_pwd"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_50dp"
+        android:background="@color/color_ffffff">
+
+        <!-- item_icon -->
+        <ImageView
+            android:id="@+id/icon_find_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/text_find_pwd"
+            android:layout_alignTop="@+id/text_find_pwd"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/d15"
+            android:visibility="gone"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_zhengzhuang" />
+
+        <!-- title -->
+        <TextView
+            android:id="@+id/text_find_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon_find_pwd"
+            android:drawableEnd="@mipmap/ic_list_rightarrow"
+            android:drawableRight="@mipmap/ic_list_rightarrow"
+            android:layout_marginLeft="@dimen/d15"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/d5"
+            android:paddingRight="@dimen/d15"
+            android:textColor="@color/color_1a1a1a"
+            android:textSize="@dimen/d16"
+            android:text="修改密码" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_10dp"
+        android:background="@color/color_f5f5f5"/>
+    <RelativeLayout
+        android:id="@+id/rLay_about_us"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_50dp"
+        android:background="@color/color_ffffff">
+
+        <!-- item_icon -->
+        <ImageView
+            android:id="@+id/icon_about_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/text_about_us"
+            android:layout_alignTop="@+id/text_about_us"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/d15"
+            android:visibility="gone"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_zhengzhuang" />
+
+        <!-- title -->
+        <TextView
+            android:id="@+id/text_about_us"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon_about_us"
+            android:drawableEnd="@mipmap/ic_list_rightarrow"
+            android:drawableRight="@mipmap/ic_list_rightarrow"
+            android:layout_marginLeft="@dimen/d15"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/d5"
+            android:paddingRight="@dimen/d15"
+            android:textColor="@color/color_1a1a1a"
+            android:textSize="@dimen/d16"
+            android:text="@string/about_us" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rLay_logout"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dimens_20dp"
+        android:layout_height="@dimen/dimens_50dp"
+        android:background="@color/color_ffffff">
+
+        <!-- title -->
+        <TextView
+            android:id="@+id/text_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="@dimen/d5"
+            android:paddingRight="@dimen/d15"
+            android:textColor="@color/color_1a1a1a"
+            android:textSize="@dimen/d16"
+            android:text="退出登录" />
+    </RelativeLayout>
+    <!--设备管理-->
+</LinearLayout>

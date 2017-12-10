@@ -20,6 +20,7 @@ import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.activity.loginmoudle.guide.GuideActivity;
 import com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity;
 import com.bh.uhome.bhuhome.constant.APPConstant;
+import com.bh.uhome.bhuhome.db.sharedprefer.ShareCache;
 import com.bh.uhome.bhuhome.entity.UserInfo;
 import com.bh.uhome.bhuhome.http.api.LoginApi;
 import com.bh.uhome.bhuhome.http.parse.ParseDataUtil;
@@ -198,7 +199,7 @@ public class LoginNewActivity extends BaseActivity implements HttpOnNextListener
         switch (v.getId()) {
             case R.id.text_view_password:
                 //找回密码
-                FastRetrievePasswordActivity.actionStart(this);
+                FindPasswordActivity.actionStart(this);
                 break;
             case R.id.text_view_login:
                 //快速登录/注册
@@ -261,6 +262,7 @@ public class LoginNewActivity extends BaseActivity implements HttpOnNextListener
             user = ParseDataUtil.paseJsonData(resulte,UserInfo.class,LoginNewActivity.this);
             if (1 == user.getCode()){
                 HomeActivity.actionStart(this,0);
+                ShareCache.getInstance(this).saveUserName(phone);
                 finish();
             }
         }

@@ -10,6 +10,7 @@ import com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity;
 import com.bh.uhome.bhuhome.activity.loginmoudle.login.FastEnterActivity;
 import com.bh.uhome.bhuhome.activity.loginmoudle.login.LoginNewActivity;
 import com.bh.uhome.bhuhome.constant.APPConstant;
+import com.bh.uhome.bhuhome.db.sharedprefer.ShareCache;
 import com.bh.uhome.lib.base.app.RxRetrofitApp;
 import com.bh.uhome.lib.base.base.BaseActivity;
 import com.bh.uhome.lib.base.net.db.ShareToken;
@@ -109,7 +110,7 @@ public class LaunchActivity extends BaseActivity implements LaunchContract.ILaun
     }
 
     private void nextPage(){
-        if(APPConstant.isFirstLaunch){
+        if(!ShareCache.getInstance(this).getIsLaunch()){
             // 引导页
             GuideActivity.actionStart(this);
         }else{

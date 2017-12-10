@@ -5,11 +5,13 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity;
 import com.bh.uhome.bhuhome.activity.loginmoudle.login.LoginNewActivity;
 import com.bh.uhome.bhuhome.adapter.GuideAdapter;
+import com.bh.uhome.bhuhome.db.sharedprefer.ShareCache;
 import com.bh.uhome.lib.base.base.BaseActivity;
 
 
@@ -26,7 +28,7 @@ public class GuideActivity extends BaseActivity implements GuideContract.IGuideV
     private static final String KEY_ONLINE = "key_online";
     private int[] images = new int[]{R.mipmap.guide_one, R.mipmap.guide_two,R.mipmap.guide_three};
     private LinearLayout layoutPointers;
-    private ImageView imageButton;
+    private TextView imageButton;
     private ViewPager viewPager = null;
     private LinearLayout.LayoutParams dotParams = null;
 
@@ -89,13 +91,7 @@ public class GuideActivity extends BaseActivity implements GuideContract.IGuideV
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:保存版本
-//                UserPreferences.$(getApplication()).saveCurrentVersion();
-//                if(getIntent().getBooleanExtra(KEY_ONLINE,false)){
-//                    HomeActivity.actionStart(GuideActivity.this,0);
-//                }else {
-//                    LoginActivity.actionStart(GuideActivity.this);
-//                }
+                ShareCache.getInstance(GuideActivity.this).saveIsLaunch(true);
                 LoginNewActivity.actionStart(GuideActivity.this,"");
                 finish();
             }

@@ -2,15 +2,19 @@ package com.bh.uhome.bhuhome.http.service;
 
 import com.bh.uhome.bhuhome.activity.loginmoudle.login.RegisterActivity;
 import com.bh.uhome.bhuhome.http.api.CameraDeviceInfAPI;
+import com.bh.uhome.bhuhome.http.api.ChangePwdAPI;
 import com.bh.uhome.bhuhome.http.api.DeviceInfAPI;
 import com.bh.uhome.bhuhome.http.api.HeartBeatAPI;
 import com.bh.uhome.bhuhome.http.api.LoginApi;
 import com.bh.uhome.bhuhome.http.api.LoginCodeApi;
+import com.bh.uhome.bhuhome.http.api.LoginOutAPI;
 import com.bh.uhome.bhuhome.http.api.RegisterAPI;
 import com.bh.uhome.bhuhome.http.api.VerificationCodeAPI;
 import com.bh.uhome.bhuhome.http.api.VersionAPI;
 import com.bh.uhome.bhuhome.http.api.YSTokenApi;
+import com.bh.uhome.bhuhome.http.api.body.ChangePwdBody;
 import com.bh.uhome.bhuhome.http.api.body.LoginCodeRequestBody;
+import com.bh.uhome.bhuhome.http.api.body.LoginOutBody;
 import com.bh.uhome.bhuhome.http.api.body.LoginRequestBody;
 import com.bh.uhome.bhuhome.http.api.body.RegisterBody;
 
@@ -65,6 +69,12 @@ public interface IBHService {
 
     @POST(RegisterAPI.METHOD)
     Observable<String> getRegister(@Body RegisterBody requestBody);
+
+    @POST(ChangePwdAPI.METHOD)
+    Observable<String> getChangePwd(@Body ChangePwdBody requestBody);
+
+    @POST(LoginOutAPI.METHOD)
+    Observable<String> getLoginOut(@Body LoginOutBody requestBody);
 
 
 }

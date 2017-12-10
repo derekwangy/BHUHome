@@ -36,6 +36,11 @@
     <string name="help_center">帮助中心</string>
     <string name="online_service">在线客服</string>
     <string name="about_us">关于我们</string>
+    <string name="string_settings">设置</string>
+    <string name="string_logout">退出登录</string>
+    <string name="string_are_you_sure_you_want_to_logout">您确定要退出登录吗？</string>
+    <string name="string_cancel">取消</string>
+    <string name="string_confirm">确定</string>
 
     <string name="mine_latest_version">当前已是最新版本</string>
     <string name="mine_ensure_version">请点击确定进行更新！</string>

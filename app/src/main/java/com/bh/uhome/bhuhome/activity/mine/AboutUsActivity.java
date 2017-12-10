@@ -1,6 +1,7 @@
 package com.bh.uhome.bhuhome.activity.mine;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bh.uhome.bhuhome.R;
@@ -15,8 +16,8 @@ import com.bh.uhome.lib.base.base.BaseActivity;
  * @description Describe
  */
 public class AboutUsActivity extends BaseActivity {
-    private TextView txtVersionName;
-    private TitleBarView titleBarView;
+    private TextView txtVersionName,txtMidTitle;
+    private ImageView imgBack;
     @Override
     protected void initContentView() {
         setContentView(R.layout.activity_about_us);
@@ -24,15 +25,16 @@ public class AboutUsActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        titleBarView = findView(R.id.title);
-        txtVersionName = findViewById(R.id.txt_version_name);
+        imgBack = findView(R.id.imgBack);
+        txtVersionName = findView(R.id.txt_version_name);
+        txtMidTitle = findView(R.id.txtMidTitle);
+
     }
 
     @Override
     protected void initData() {
-        titleBarView.titleHeaderTitleTv.setText("关于我们");
-        titleBarView.titleHeaderLeftIv.setVisibility(View.VISIBLE);
-        titleBarView.titleHeaderLeftIv.setOnClickListener(new View.OnClickListener() {
+        txtMidTitle.setText("关于我们");
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

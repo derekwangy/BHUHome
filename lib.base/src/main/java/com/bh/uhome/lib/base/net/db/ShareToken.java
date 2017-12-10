@@ -26,9 +26,11 @@ public class ShareToken {
             synchronized (ShareToken.class){
                 if (instance == null){
                     instance = new ShareToken();
-                    sharedPreferences = mContext.getSharedPreferences(DB_TOKEN, MODE_PRIVATE);
                 }
             }
+        }
+        if (sharedPreferences == null){
+            sharedPreferences = mContext.getSharedPreferences(DB_TOKEN, MODE_PRIVATE);
         }
         return instance;
     }
@@ -38,9 +40,7 @@ public class ShareToken {
      * @param data
      */
     public  void saveToken(String data){
-        if (sharedPreferences == null){
-            sharedPreferences = mContext.getSharedPreferences(DB_TOKEN, MODE_PRIVATE);
-        }
+
         sharedPreferences.edit().putString(TOKEN, data).commit();
     }
 
@@ -49,9 +49,7 @@ public class ShareToken {
      * @return
      */
     public String getToken(){
-        if (sharedPreferences == null){
-            sharedPreferences = mContext.getSharedPreferences(DB_TOKEN, MODE_PRIVATE);
-        }
+
         return sharedPreferences.getString(TOKEN, "");
     }
 }

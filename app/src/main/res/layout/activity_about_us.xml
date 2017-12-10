@@ -6,10 +6,8 @@
     android:background="@color/color_f0f0f0"
     android:orientation="vertical"
     >
-    <com.bh.uhome.bhuhome.widget.TitleBarView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <include layout="@layout/head_title_layout"
+        android:id="@+id/title"/>
 
     <ImageView
         android:id="@+id/image_view_1"
