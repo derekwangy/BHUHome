@@ -169,7 +169,7 @@ public class FindPasswordActivity extends BaseActivity implements HttpOnNextList
 
     @Override
     public void onNext(String resulte, String method) {
-        if (RegisterAPI.METHOD.equals(method)){
+        if (FindPwdAPI.METHOD.equals(method)){
             StandarDataInfo info = ParseDataUtil.paseJsonData(resulte,StandarDataInfo.class,FindPasswordActivity.this);
             if (info != null && 1 == info.getCode()){
                 ToastUtil.showLong(FindPasswordActivity.this,"密码找回成功");
@@ -180,7 +180,7 @@ public class FindPasswordActivity extends BaseActivity implements HttpOnNextList
 
     @Override
     public void onError(ApiException e, String method) {
-        if (RegisterAPI.METHOD.equals(method)){
+        if (FindPwdAPI.METHOD.equals(method)){
             ToastUtil.showLong(FindPasswordActivity.this,"密码找回失败");
         }
     }
