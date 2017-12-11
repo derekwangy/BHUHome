@@ -13,6 +13,7 @@ import com.bh.uhome.bhuhome.R;
 import com.bh.uhome.bhuhome.activity.loginmoudle.home.HomeActivity;
 import com.bh.uhome.bhuhome.constant.APPConstant;
 import com.bh.uhome.bhuhome.entity.StandarDataInfo;
+import com.bh.uhome.bhuhome.http.api.FindPwdAPI;
 import com.bh.uhome.bhuhome.http.api.RegisterAPI;
 import com.bh.uhome.bhuhome.http.api.VerificationCodeAPI;
 import com.bh.uhome.bhuhome.http.parse.ParseDataUtil;
@@ -62,7 +63,7 @@ public class FindPasswordActivity extends BaseActivity implements HttpOnNextList
     TextView txtMidTitle;
 
     protected HttpManager manager; //网络管理类
-    private RegisterAPI registerAPI;
+    private FindPwdAPI findPwdAPI;
     private VerificationCodeAPI codeAPI;
     private String phone;
 
@@ -161,8 +162,8 @@ public class FindPasswordActivity extends BaseActivity implements HttpOnNextList
             return;
         }
 
-        registerAPI = new RegisterAPI(phone,edit_check_code.getText().toString(),pwd);
-        manager.doHttpDeal(registerAPI);
+        findPwdAPI = new FindPwdAPI(phone,edit_check_code.getText().toString(),pwd);
+        manager.doHttpDeal(findPwdAPI);
 
     }
 
@@ -171,6 +172,7 @@ public class FindPasswordActivity extends BaseActivity implements HttpOnNextList
         if (RegisterAPI.METHOD.equals(method)){
             StandarDataInfo info = ParseDataUtil.paseJsonData(resulte,StandarDataInfo.class,FindPasswordActivity.this);
             if (info != null && 1 == info.getCode()){
+                ToastUtil.showLong(FindPasswordActivity.this,"密码找回成功");
                 finish();
             }
         }
@@ -179,7 +181,7 @@ public class FindPasswordActivity extends BaseActivity implements HttpOnNextList
     @Override
     public void onError(ApiException e, String method) {
         if (RegisterAPI.METHOD.equals(method)){
-            ToastUtil.showLong(FindPasswordActivity.this,"注册失败");
+            ToastUtil.showLong(FindPasswordActivity.this,"密码找回失败");
         }
     }
 }

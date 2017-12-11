@@ -4,6 +4,7 @@ import com.bh.uhome.bhuhome.activity.loginmoudle.login.RegisterActivity;
 import com.bh.uhome.bhuhome.http.api.CameraDeviceInfAPI;
 import com.bh.uhome.bhuhome.http.api.ChangePwdAPI;
 import com.bh.uhome.bhuhome.http.api.DeviceInfAPI;
+import com.bh.uhome.bhuhome.http.api.FindPwdAPI;
 import com.bh.uhome.bhuhome.http.api.HeartBeatAPI;
 import com.bh.uhome.bhuhome.http.api.LoginApi;
 import com.bh.uhome.bhuhome.http.api.LoginCodeApi;
@@ -75,6 +76,9 @@ public interface IBHService {
 
     @POST(LoginOutAPI.METHOD)
     Observable<String> getLoginOut(@Body LoginOutBody requestBody);
+
+    @POST(FindPwdAPI.METHOD)
+    Observable<String> getFindPwd(@Body RegisterBody requestBody);
 
 
 }
