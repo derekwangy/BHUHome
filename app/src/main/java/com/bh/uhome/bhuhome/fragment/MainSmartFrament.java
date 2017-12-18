@@ -66,6 +66,7 @@ import com.bh.uhome.bhuhome.dialog.WaitDialog;
 import com.bh.uhome.bhuhome.entity.DeviceControlInfo;
 import com.bh.uhome.bhuhome.entity.HomeMenuInfo;
 import com.bh.uhome.bhuhome.entity.RealPlaySquareInfo;
+import com.bh.uhome.bhuhome.http.api.ControlDeviceAPI;
 import com.bh.uhome.bhuhome.http.api.DeviceInfAPI;
 import com.bh.uhome.bhuhome.recycleviewmanager.FullyLinearLayoutManager;
 import com.bh.uhome.bhuhome.util.ActivityUtils;
@@ -394,6 +395,8 @@ public class MainSmartFrament extends BaseFragment implements View.OnClickListen
         if (DeviceInfAPI.method.equals(method)){
             deviceControlInfo = new Gson().fromJson(resulte,DeviceControlInfo.class);
             setChildHomeMenuData();
+        }else if(ControlDeviceAPI.METHOD.equals(method)){
+
         }
     }
 
@@ -607,8 +610,7 @@ public class MainSmartFrament extends BaseFragment implements View.OnClickListen
 
             @Override
             public void onItemClick(DeviceControlInfo.DataBean.DevNamesBean itemBean, int position) {
-                ToastUtil.showShort(mActivity,itemBean.getLocation());
-                ActivityUtils.goToLoginAgain(mActivity);
+                manager.doHttpDeal(new ControlDeviceAPI("",itemBean.getLocation(),itemBean.getDeviceID(),itemBean.getState()));
             }
 
         });

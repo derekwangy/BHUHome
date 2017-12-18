@@ -3,6 +3,7 @@ package com.bh.uhome.bhuhome.http.service;
 import com.bh.uhome.bhuhome.activity.loginmoudle.login.RegisterActivity;
 import com.bh.uhome.bhuhome.http.api.CameraDeviceInfAPI;
 import com.bh.uhome.bhuhome.http.api.ChangePwdAPI;
+import com.bh.uhome.bhuhome.http.api.ControlDeviceAPI;
 import com.bh.uhome.bhuhome.http.api.DeviceInfAPI;
 import com.bh.uhome.bhuhome.http.api.FindPwdAPI;
 import com.bh.uhome.bhuhome.http.api.HeartBeatAPI;
@@ -14,6 +15,7 @@ import com.bh.uhome.bhuhome.http.api.VerificationCodeAPI;
 import com.bh.uhome.bhuhome.http.api.VersionAPI;
 import com.bh.uhome.bhuhome.http.api.YSTokenApi;
 import com.bh.uhome.bhuhome.http.api.body.ChangePwdBody;
+import com.bh.uhome.bhuhome.http.api.body.ControlDeviceBody;
 import com.bh.uhome.bhuhome.http.api.body.LoginCodeRequestBody;
 import com.bh.uhome.bhuhome.http.api.body.LoginOutBody;
 import com.bh.uhome.bhuhome.http.api.body.LoginRequestBody;
@@ -79,6 +81,9 @@ public interface IBHService {
 
     @POST(FindPwdAPI.METHOD)
     Observable<String> getFindPwd(@Body RegisterBody requestBody);
+
+    @POST(ControlDeviceAPI.METHOD)
+    Observable<String> requestControlDevice(@Body ControlDeviceBody requestBody);
 
 
 }
